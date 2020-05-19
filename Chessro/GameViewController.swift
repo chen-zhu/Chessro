@@ -8,6 +8,7 @@
 
 import UIKit
 import RealityKit
+import ARKit
 
 class GameViewController: UIViewController {
     
