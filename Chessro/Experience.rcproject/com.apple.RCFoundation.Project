@@ -1453,14 +1453,47 @@
                           }
                         ],
                         [
+                          "material",
+                          {
+                            "typeName" : "String",
+                            "value" : "clearCoatPaint"
+                          }
+                        ],
+                        [
+                          "materialColor",
+                          {
+                            "typeName" : "double4",
+                            "value" : [
+                              0.11966583877801895,
+                              0.11966583877801895,
+                              0.11966583877801895,
+                              1
+                            ]
+                          }
+                        ],
+                        [
                           "style",
                           {
                             "typeName" : "String",
-                            "value" : "Stylized"
+                            "value" : "Iconic"
                           }
                         ]
                       ],
                       "children" : {
+                        "iconicItem" : {
+                          "overrides" : {
+                            "factory" : null,
+                            "runtimeAttributes" : [
+                              [
+                                "RuntimeIdentifier",
+                                {
+                                  "typeName" : "UUID",
+                                  "value" : "87CC6BD0-F157-4853-BB91-4794B744509A"
+                                }
+                              ]
+                            ]
+                          }
+                        },
                         "item" : {
                           "overrides" : {
                             "factory" : null,
@@ -2174,14 +2207,47 @@
                           }
                         ],
                         [
+                          "material",
+                          {
+                            "typeName" : "String",
+                            "value" : "clearCoatPaint"
+                          }
+                        ],
+                        [
+                          "materialColor",
+                          {
+                            "typeName" : "double4",
+                            "value" : [
+                              0.11966583877801895,
+                              0.11966583877801895,
+                              0.11966583877801895,
+                              1
+                            ]
+                          }
+                        ],
+                        [
                           "style",
                           {
                             "typeName" : "String",
-                            "value" : "Stylized"
+                            "value" : "Iconic"
                           }
                         ]
                       ],
                       "children" : {
+                        "iconicItem" : {
+                          "overrides" : {
+                            "factory" : null,
+                            "runtimeAttributes" : [
+                              [
+                                "RuntimeIdentifier",
+                                {
+                                  "typeName" : "UUID",
+                                  "value" : "85C4260D-75A9-4467-924A-7E4683254BA5"
+                                }
+                              ]
+                            ]
+                          }
+                        },
                         "item" : {
                           "overrides" : {
                             "factory" : null,
@@ -3081,21 +3147,21 @@
               "title" : "chessScene",
               "viewTransform" : {
                 "cameraTransform" : [
-                  0.99999582767486572,
-                  4.4703483581542969e-08,
-                  0.0028708428144454956,
+                  -0.063209995627403259,
+                  3.166496753692627e-08,
+                  -0.99800020456314087,
                   0,
-                  0.0028611987363547087,
-                  0.082248330116271973,
-                  -0.99660772085189819,
+                  -0.24861793220043182,
+                  0.96847361326217651,
+                  0.015746515244245529,
                   0,
-                  -0.00023652818344999105,
-                  0.99661177396774292,
-                  0.082248203456401825,
+                  0.96653693914413452,
+                  0.24911601841449738,
+                  -0.061216756701469421,
                   0,
-                  0.053817607462406158,
-                  0.51543241739273071,
-                  0.12910088896751404,
+                  0.58907276391983032,
+                  0.052997585386037827,
+                  -0.098264150321483612,
                   1
                 ],
                 "sceneTransform" : [
