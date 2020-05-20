@@ -100,11 +100,11 @@
 		DD515A332473453D009FEBED /* Pieces */ = {
 			isa = PBXGroup;
 			children = (
-				DD515A342473455E009FEBED /* King.swift */,
 				DD515A3624734567009FEBED /* Rook.swift */,
+				DD515A3C2473458D009FEBED /* Knight.swift */,
 				DD515A3824734571009FEBED /* Bishop.swift */,
 				DD515A3A2473457C009FEBED /* Queen.swift */,
-				DD515A3C2473458D009FEBED /* Knight.swift */,
+				DD515A342473455E009FEBED /* King.swift */,
 				DD515A3E24734599009FEBED /* Pawn.swift */,
 			);
 			path = Pieces;
