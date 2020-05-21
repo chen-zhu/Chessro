@@ -10,9 +10,9 @@ import Foundation
 import RealityKit
 
 class Knight: ChessPiece{
-    var h: Int
+    var row: Int
     
-    var v: Int
+    var column: Int
     
     var PieceColor: color
     
@@ -22,19 +22,41 @@ class Knight: ChessPiece{
     
     var ARObject: Entity
     
-    init(setColor: color, h_po: Int, v_po: Int) {
+    init(setColor: color, r_pos: Int, c_pos: Int) {
         self.PieceColor = setColor
         self.type = .knight
         self.killed = false
         self.ARObject = Entity()
-        self.h = h_po
-        self.v = v_po
+        self.row = r_pos
+        self.column = c_pos
     }
     
-    func validStep(from_x: Int, from_y: Int) {
-        //balabala~
-        //give a list of available postion that we can move to~
+    func validStep(chessBoard: ChessBoard) -> Array<SIMD2<Int>>{
+        var result: Array<SIMD2<Int>> = []
+
+        let position_mocking: [SIMD2<Int>] = [
+           [row - 2, column - 1],
+           [row - 2, column + 1],
+           [row + 2, column - 1],
+           [row + 2, column + 1],
+           [row - 1, column - 2],
+           [row - 1, column + 2],
+           [row + 1, column - 2],
+           [row + 1, column + 2]
+        ]
+
+        for pos in position_mocking {
+           if (0...7).contains(pos[0]) && (0...7).contains(pos[1]) {
+               let piece = chessBoard.ChessBoard[pos[0]][pos[1]]
+               if piece == nil {
+                   result.append(pos)
+               } else if(piece != nil && piece?.PieceColor != PieceColor){
+                   result.append(pos)
+               }
+           }
+        }
         
+        return result
     }
     
     

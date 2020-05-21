@@ -12,9 +12,9 @@ import RealityKit
 
 protocol ChessPiece {
     
-    var h: Int { get set }
+    var row: Int { get set }
     
-    var v: Int { get set }
+    var column: Int { get set }
     
     var PieceColor: color{ get set }
     
@@ -30,7 +30,7 @@ protocol ChessPiece {
     /**
         This function will return a list of valid move for the current chess piece
      */
-    func validStep(from_x: Int, from_y: Int)
+    func validStep(chessBoard: ChessBoard) -> Array<SIMD2<Int>>
     
 }
 

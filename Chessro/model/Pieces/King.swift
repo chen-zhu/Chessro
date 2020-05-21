@@ -10,9 +10,9 @@ import Foundation
 import RealityKit
 
 class King: ChessPiece{
-    var h: Int
+    var row: Int
        
-    var v: Int
+    var column: Int
        
     var PieceColor: color
     
@@ -22,19 +22,34 @@ class King: ChessPiece{
     
     var ARObject: Entity
     
-    init(setColor: color, h_po: Int, v_po: Int) {
+    init(setColor: color, r_pos: Int, c_pos: Int) {
         self.PieceColor = setColor
         self.type = .king
         self.killed = false
         self.ARObject = Entity()
-        self.h = h_po
-        self.v = v_po
+        self.row = r_pos
+        self.column = c_pos
     }
     
-    func validStep(from_x: Int, from_y: Int) {
-        //balabala~
-        //give a list of available postion that we can move to~
+    func validStep(chessBoard: ChessBoard) -> Array<SIMD2<Int>>{
+        var result: Array<SIMD2<Int>> = []
         
+        for r_range in [-1, 0, 1] {
+           for c_range in [-1, 0, 1] {
+               let checkRow = row + r_range
+               let checkCol = column + c_range
+               if (0...7).contains(checkRow) && (0...7).contains(checkCol) {
+                   let piece = chessBoard.ChessBoard[checkRow][checkCol]
+                   if(piece == nil) {
+                       result.append([checkRow, checkCol])
+                   } else if(piece != nil && piece?.PieceColor != PieceColor){
+                       result.append([checkRow, checkCol])
+                   }
+               }
+           }
+        }
+               
+        return result
     }
     
     

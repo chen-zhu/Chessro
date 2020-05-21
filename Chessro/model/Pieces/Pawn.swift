@@ -10,9 +10,9 @@ import Foundation
 import RealityKit
 
 class Pawn: ChessPiece{
-    var h: Int
+    var row: Int
     
-    var v: Int
+    var column: Int
     
     var PieceColor: color
     
@@ -22,19 +22,58 @@ class Pawn: ChessPiece{
     
     var ARObject: Entity
     
-    init(setColor: color, h_po: Int, v_po: Int) {
+    var init_pos = true
+    
+    init(setColor: color, r_pos: Int, c_pos: Int) {
         self.PieceColor = setColor
         self.type = .pawn
         self.killed = false
         self.ARObject = Entity()
-        self.h = h_po
-        self.v = v_po
+        self.row = r_pos
+        self.column = c_pos
     }
     
-    func validStep(from_x: Int, from_y: Int) {
-        //balabala~
-        //give a list of available postion that we can move to~
+    func validStep(chessBoard: ChessBoard) -> Array<SIMD2<Int>>{
+        var result: Array<SIMD2<Int>> = []
         
+        //White goes up && black piece goes downward!
+        let direction = PieceColor == .white ? 1 : -1
+        let checkRow = row + direction
+        let checkCol = column
+        
+        //If the forawrd position is numm, then move!
+        if chessBoard.ChessBoard[checkRow][checkCol] == nil {
+            result.append([checkRow, checkCol])
+            if init_pos {
+                let moreStep = checkRow + direction
+                if chessBoard.ChessBoard[moreStep][checkCol] == nil {
+                    result.append([moreStep, checkCol])
+                }
+            }
+        }
+                
+        /**
+         TODO:  Need to handle En Passant case!
+         */
+        
+        //If enemy is in diagonal direction~
+        let checkLeft = checkCol - 1
+        if checkLeft >= 0 {
+            let piece = chessBoard.ChessBoard[checkRow][checkLeft]
+            if piece != nil && piece?.PieceColor != PieceColor {
+                result.append([checkRow, checkLeft])
+            }
+        }
+        
+        let checkRight = checkCol + 1
+        if checkRight <= 7 {
+            let piece = chessBoard.ChessBoard[checkRow][checkRight]
+            if piece != nil && piece?.PieceColor != PieceColor {
+                result.append([checkRow, checkRight])
+            }
+        }
+        
+        return result
     }
     
     

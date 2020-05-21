@@ -28,6 +28,13 @@ class ChessBoard{
     var ChessBoard: [[ChessPiece?]] = []
     
     init() {
+        for i in 0...7 {
+            ChessBoard.append( [] )
+            for _ in 0...7 {
+                ChessBoard[i].append(nil)
+            }
+        }
+        
         loadBoard()
     }
     
@@ -36,44 +43,44 @@ class ChessBoard{
     
     func loadBoard(){
         //WHITE
-        ChessBoard[0][0] = Rook(    setColor: .white, h_po: 0, v_po: 0);
-        ChessBoard[0][1] = Knight(  setColor: .white, h_po: 0, v_po: 1);
-        ChessBoard[0][2] = Bishop(  setColor: .white, h_po: 0, v_po: 2);
-        ChessBoard[0][3] = Queen(   setColor: .white, h_po: 0, v_po: 3);
-        ChessBoard[0][4] = King(    setColor: .white, h_po: 0, v_po: 4);
-        ChessBoard[0][5] = Bishop(  setColor: .white, h_po: 0, v_po: 5);
-        ChessBoard[0][6] = Knight(  setColor: .white, h_po: 0, v_po: 6);
-        ChessBoard[0][7] = Rook(    setColor: .white, h_po: 0, v_po: 7);
+        self.ChessBoard[0][0] = Rook(    setColor: .white, r_pos: 0, c_pos: 0);
+        self.ChessBoard[0][1] = Knight(  setColor: .white, r_pos: 0, c_pos: 1);
+        self.ChessBoard[0][2] = Bishop(  setColor: .white, r_pos: 0, c_pos: 2);
+        self.ChessBoard[0][3] = Queen(   setColor: .white, r_pos: 0, c_pos: 3);
+        self.ChessBoard[0][4] = King(    setColor: .white, r_pos: 0, c_pos: 4);
+        self.ChessBoard[0][5] = Bishop(  setColor: .white, r_pos: 0, c_pos: 5);
+        self.ChessBoard[0][6] = Knight(  setColor: .white, r_pos: 0, c_pos: 6);
+        self.ChessBoard[0][7] = Rook(    setColor: .white, r_pos: 0, c_pos: 7);
         
         //WHITE Pawns
-        ChessBoard[1][0] = Pawn(    setColor: .white, h_po: 1, v_po: 0);
-        ChessBoard[1][1] = Pawn(    setColor: .white, h_po: 1, v_po: 1);
-        ChessBoard[1][2] = Pawn(    setColor: .white, h_po: 1, v_po: 2);
-        ChessBoard[1][3] = Pawn(    setColor: .white, h_po: 1, v_po: 3);
-        ChessBoard[1][4] = Pawn(    setColor: .white, h_po: 1, v_po: 4);
-        ChessBoard[1][5] = Pawn(    setColor: .white, h_po: 1, v_po: 5);
-        ChessBoard[1][6] = Pawn(    setColor: .white, h_po: 1, v_po: 6);
-        ChessBoard[1][7] = Pawn(    setColor: .white, h_po: 1, v_po: 7);
+        self.ChessBoard[1][0] = Pawn(    setColor: .white, r_pos: 1, c_pos: 0);
+        self.ChessBoard[1][1] = Pawn(    setColor: .white, r_pos: 1, c_pos: 1);
+        self.ChessBoard[1][2] = Pawn(    setColor: .white, r_pos: 1, c_pos: 2);
+        self.ChessBoard[1][3] = Pawn(    setColor: .white, r_pos: 1, c_pos: 3);
+        self.ChessBoard[1][4] = Pawn(    setColor: .white, r_pos: 1, c_pos: 4);
+        self.ChessBoard[1][5] = Pawn(    setColor: .white, r_pos: 1, c_pos: 5);
+        self.ChessBoard[1][6] = Pawn(    setColor: .white, r_pos: 1, c_pos: 6);
+        self.ChessBoard[1][7] = Pawn(    setColor: .white, r_pos: 1, c_pos: 7);
         
         //BLACK
-        ChessBoard[7][0] = Rook(    setColor: .black, h_po: 7, v_po: 0);
-        ChessBoard[7][1] = Knight(  setColor: .black, h_po: 7, v_po: 1);
-        ChessBoard[7][2] = Bishop(  setColor: .black, h_po: 7, v_po: 2);
-        ChessBoard[7][3] = Queen(   setColor: .black, h_po: 7, v_po: 3);
-        ChessBoard[7][4] = King(    setColor: .black, h_po: 7, v_po: 4);
-        ChessBoard[7][5] = Bishop(  setColor: .black, h_po: 7, v_po: 5);
-        ChessBoard[7][6] = Knight(  setColor: .black, h_po: 7, v_po: 6);
-        ChessBoard[7][7] = Rook(    setColor: .black, h_po: 7, v_po: 7);
+        self.ChessBoard[7][0] = Rook(    setColor: .black, r_pos: 7, c_pos: 0);
+        self.ChessBoard[7][1] = Knight(  setColor: .black, r_pos: 7, c_pos: 1);
+        self.ChessBoard[7][2] = Bishop(  setColor: .black, r_pos: 7, c_pos: 2);
+        self.ChessBoard[7][3] = Queen(   setColor: .black, r_pos: 7, c_pos: 3);
+        self.ChessBoard[7][4] = King(    setColor: .black, r_pos: 7, c_pos: 4);
+        self.ChessBoard[7][5] = Bishop(  setColor: .black, r_pos: 7, c_pos: 5);
+        self.ChessBoard[7][6] = Knight(  setColor: .black, r_pos: 7, c_pos: 6);
+        self.ChessBoard[7][7] = Rook(    setColor: .black, r_pos: 7, c_pos: 7);
         
         //BLACK Pawns
-        ChessBoard[6][0] = Pawn(    setColor: .black, h_po: 6, v_po: 0);
-        ChessBoard[6][1] = Pawn(    setColor: .black, h_po: 6, v_po: 1);
-        ChessBoard[6][2] = Pawn(    setColor: .black, h_po: 6, v_po: 2);
-        ChessBoard[6][3] = Pawn(    setColor: .black, h_po: 6, v_po: 3);
-        ChessBoard[6][4] = Pawn(    setColor: .black, h_po: 6, v_po: 4);
-        ChessBoard[6][5] = Pawn(    setColor: .black, h_po: 6, v_po: 5);
-        ChessBoard[6][6] = Pawn(    setColor: .black, h_po: 6, v_po: 6);
-        ChessBoard[6][7] = Pawn(    setColor: .black, h_po: 6, v_po: 7);
+        self.ChessBoard[6][0] = Pawn(    setColor: .black, r_pos: 6, c_pos: 0);
+        self.ChessBoard[6][1] = Pawn(    setColor: .black, r_pos: 6, c_pos: 1);
+        self.ChessBoard[6][2] = Pawn(    setColor: .black, r_pos: 6, c_pos: 2);
+        self.ChessBoard[6][3] = Pawn(    setColor: .black, r_pos: 6, c_pos: 3);
+        self.ChessBoard[6][4] = Pawn(    setColor: .black, r_pos: 6, c_pos: 4);
+        self.ChessBoard[6][5] = Pawn(    setColor: .black, r_pos: 6, c_pos: 5);
+        self.ChessBoard[6][6] = Pawn(    setColor: .black, r_pos: 6, c_pos: 6);
+        self.ChessBoard[6][7] = Pawn(    setColor: .black, r_pos: 6, c_pos: 7);
         
         for i in 2...5 {
             for t in 0...7 {
