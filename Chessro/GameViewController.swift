@@ -26,16 +26,10 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Load the "Box" scene from the "Experience" Reality File
-        //ChessSceneAnchor = try! Experience.loadChessScene()
-        
-        // Add the box anchor to the scene
-        //ChessSceneAnchor.generateCollisionShapes(recursive: true)
         ChessSceneAnchor = try! Experience.loadChessScene()
         arView.scene.anchors.append(ChessSceneAnchor)//.
         
         self.LinkingEntities()
-        //print(reverseLookUp)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -72,7 +66,6 @@ class GameViewController: UIViewController {
     
     func LinkingEntities(){
         //Link white pieces
-        
         
         // Not In Use ATM
         /*
@@ -165,10 +158,8 @@ class GameViewController: UIViewController {
     }
     
     func drawMovableGrid(pos: SIMD3<Float>){
-        let model = ModelEntity(mesh: .generatePlane(width: Float(gridSize), depth: Float(gridSize)), materials: [SimpleMaterial.init(color: .green, isMetallic: true)])
+        let model = ModelEntity(mesh: .generatePlane(width: Float(gridSize - 0.02), depth: Float(gridSize - 0.02), cornerRadius: 0.7), materials: [SimpleMaterial.init(color: UIColor(red: 1, green: 0.7137, blue: 0, alpha: 0.8), isMetallic: true)])
         ChessSceneAnchor.addChild(model)
-        //var pos = model.position
-        //pos.y = Float(gridHeight)
         model.position = pos
         movableGrids.append(model)
     }
@@ -180,13 +171,10 @@ class GameViewController: UIViewController {
         }
     }
     
-    
-    
     @IBAction func Tapping(_ sender: UITapGestureRecognizer) {
         let tapLocation = sender.location(in: arView)
         
         if let piece = arView.entity(at: tapLocation){
-            //print(piece)
             let OOD = reverseLookUp[piece.id]
             
             if(OOD != nil){
@@ -198,8 +186,6 @@ class GameViewController: UIViewController {
                     self.drawMovableGrid(pos: self.translate_pos(row: pair.x, col: pair.y))
                 }
                 
-                //let calc_pos = self.translate_pos(row: OOD!.row, col: OOD!.column)
-                //self.drawMovableGrid(pos: calc_pos)
             }
         }
         
