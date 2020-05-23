@@ -66,22 +66,22 @@
                                       "configurationBox" : {
                                         "configuration" : {
                                           "target" : [
-
+                                            "01F2B6E7-2C2F-4027-A485-520C0F2AC719"
                                           ],
-                                          "userIdentifier" : "CheckSteps"
+                                          "userIdentifier" : "whiterookoneBackTrigger"
                                         },
                                         "name" : {
                                           "type" : "custom"
                                         }
                                       },
-                                      "identifier" : "54A0F033-0A01-4E8D-BBCC-3028554A8F3A",
+                                      "identifier" : "A9DA2ABA-F091-4480-BC5A-ED265AB373D9",
                                       "isEnabled" : true
                                     }
                                   ],
                                   "__version" : 1
                                 }
                               ],
-                              "identifier" : "8D23308A-331C-4D0A-A6D4-CA93513C19F2",
+                              "identifier" : "4BDD235C-016D-4BAC-8AEC-FD2D77E841DF",
                               "isEnabled" : true
                             }
                           ],
@@ -105,13 +105,11 @@
                             {
                               "configurationBox" : {
                                 "configuration" : {
-                                  "target" : [
-                                    "01F2B6E7-2C2F-4027-A485-520C0F2AC719"
-                                  ]
+                                  "userIdentifier" : "whiterookoneFrontTrigger"
                                 },
-                                "name" : "tapTarget"
+                                "name" : "custom"
                               },
-                              "identifier" : "5BBA94F0-B195-4960-AB15-711D90950A48",
+                              "identifier" : "4681419E-031B-4DDB-97CF-CD55185989BC",
                               "isEnabled" : true
                             }
                           ],
@@ -3272,21 +3270,21 @@
               "title" : "chessScene",
               "viewTransform" : {
                 "cameraTransform" : [
-                  -0.25424942374229431,
-                  3.166496753692627e-08,
-                  -0.96713864803314209,
+                  0.9870259165763855,
+                  3.4458938813486384e-08,
+                  0.16056112945079803,
                   0,
-                  -0.64610451459884644,
-                  0.7441093921661377,
-                  0.16985318064689636,
+                  0.082607634365558624,
+                  0.85749489068984985,
+                  -0.50781744718551636,
                   0,
-                  0.71965688467025757,
-                  0.66805791854858398,
-                  -0.18918889760971069,
+                  -0.137680783867836,
+                  0.51449263095855713,
+                  0.84636944532394409,
                   0,
-                  0.6506645679473877,
-                  0.44422250986099243,
-                  -0.2580239474773407,
+                  -0.040069248527288437,
+                  0.30408880114555359,
+                  0.77019399404525757,
                   1
                 ],
                 "sceneTransform" : [
