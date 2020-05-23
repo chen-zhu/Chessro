@@ -14,9 +14,14 @@ class GameViewController: UIViewController {
     
     @IBOutlet var arView: ARView!
     
+    let gridSize = 0.04654
+    let gridHeight = 0.0139
+    
     var chessBoard = ChessBoard()
     var ChessSceneAnchor = try! Experience.loadChessScene()
     var reverseLookUp = [UInt64: ChessPiece]()
+    
+    var movableGrids = Array<ModelEntity>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,24 +30,28 @@ class GameViewController: UIViewController {
         //ChessSceneAnchor = try! Experience.loadChessScene()
         
         // Add the box anchor to the scene
+        //ChessSceneAnchor.generateCollisionShapes(recursive: true)
+        ChessSceneAnchor = try! Experience.loadChessScene()
         arView.scene.anchors.append(ChessSceneAnchor)//.
         
         self.LinkingEntities()
-        
-        print(reverseLookUp)
+        //print(reverseLookUp)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.PeopleOcclusion()
-        let notificationList = ChessSceneAnchor.notifications.allNotifications.filter({
-            $0.identifier.hasPrefix("white")
-        })
-        print(notificationList)
-        let notificationList2 = ChessSceneAnchor.notifications.allNotifications.filter({
-            $0.identifier.hasPrefix("black")
-        })
-        print(notificationList2)
+        //let notificationList = ChessSceneAnchor.notifications.allNotifications.filter({
+        //    $0.identifier.hasPrefix("white")
+        //})
+        //print(notificationList)
+        //let notificationList2 = ChessSceneAnchor.notifications.allNotifications.filter({
+        //    $0.identifier.hasPrefix("black")
+        //})
+        
+        //self.InstallGuesture()
+        
+        //print(notificationList2)
     }
     
     func PeopleOcclusion() {
@@ -142,6 +151,58 @@ class GameViewController: UIViewController {
         reverseLookUp[ChessSceneAnchor.blackpawneight!.id]  = chessBoard.ChessBoard[6][7]!
     }
     
+    /**
+     This function auto translates the array index (row, col) to the actual coordinate on the AR sense ChessBoard.
+     */
+    func translate_pos(row: Int, col: Int) -> SIMD3<Float>{
+        let offset = 3.50
+        
+        let calc_row = Float(row) - Float(offset)
+        let calc_col = Float(col) - Float(offset)
+        let y = 0 + Float(gridHeight)
+        
+        return SIMD3(calc_col * Float(gridSize), y, 0 - calc_row * Float(gridSize))
+    }
     
+    func drawMovableGrid(pos: SIMD3<Float>){
+        let model = ModelEntity(mesh: .generatePlane(width: Float(gridSize), depth: Float(gridSize)), materials: [SimpleMaterial.init(color: .green, isMetallic: true)])
+        ChessSceneAnchor.addChild(model)
+        //var pos = model.position
+        //pos.y = Float(gridHeight)
+        model.position = pos
+        movableGrids.append(model)
+    }
+    
+    func deleteMovableGrid(){
+        while !movableGrids.isEmpty {
+            guard let removed = movableGrids.popLast() else { return }
+            ChessSceneAnchor.removeChild(removed)
+        }
+    }
+    
+    
+    
+    @IBAction func Tapping(_ sender: UITapGestureRecognizer) {
+        let tapLocation = sender.location(in: arView)
+        
+        if let piece = arView.entity(at: tapLocation){
+            //print(piece)
+            let OOD = reverseLookUp[piece.id]
+            
+            if(OOD != nil){
+                let movableSet = OOD!.validStep(chessBoard: chessBoard)
+                
+                self.deleteMovableGrid()
+                
+                for pair in movableSet{
+                    self.drawMovableGrid(pos: self.translate_pos(row: pair.x, col: pair.y))
+                }
+                
+                //let calc_pos = self.translate_pos(row: OOD!.row, col: OOD!.column)
+                //self.drawMovableGrid(pos: calc_pos)
+            }
+        }
+        
+    }
     
 }
