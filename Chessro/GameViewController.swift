@@ -158,7 +158,7 @@ class GameViewController: UIViewController {
     }
     
     func drawMovableGrid(pos: SIMD3<Float>){
-        let model = ModelEntity(mesh: .generatePlane(width: Float(gridSize - 0.02), depth: Float(gridSize - 0.02), cornerRadius: 0.7), materials: [SimpleMaterial.init(color: UIColor(red: 1, green: 0.7137, blue: 0, alpha: 0.8), isMetallic: true)])
+        let model = ModelEntity(mesh: .generatePlane(width: Float(gridSize - 0.02), depth: Float(gridSize - 0.02), cornerRadius: 0.7), materials: [SimpleMaterial.init(color: UIColor(red: 1, green: 0.7137, blue: 0, alpha: 0.8), isMetallic: false)])
         ChessSceneAnchor.addChild(model)
         model.position = pos
         movableGrids.append(model)
@@ -178,8 +178,12 @@ class GameViewController: UIViewController {
             let OOD = reverseLookUp[piece.id]
             
             if(OOD != nil){
+                //1. enforce location anyway!
+                piece.position = self.translate_pos(row: OOD!.row, col: OOD!.column)
                 
-                //1. trigger the frontend
+                //TODO: do something to make it always vertical!
+                
+                //2. trigger the frontend
                 let notification = ChessSceneAnchor.notifications.allNotifications.filter({
                     $0.identifier.hasPrefix(piece.name)
                 })
@@ -198,5 +202,25 @@ class GameViewController: UIViewController {
         }
         
     }
+    
+    @IBAction func Dragging(_ sender: UIPanGestureRecognizer) {
+        let tapLocation = sender.location(in: arView)
+        
+        if let piece = arView.entity(at: tapLocation){
+            let OOD = reverseLookUp[piece.id]
+            
+            switch sender.state {
+                case .began:
+                    print("Object began to move")
+                case .changed:
+                    print("Moving object position changed")
+                case .ended:
+                    print("Done moving object")
+                default:
+                    break
+            }
+        }
+    }
+    
     
 }

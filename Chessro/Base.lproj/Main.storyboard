@@ -16,6 +16,7 @@
                         <gestureRecognizers/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="HOl-UE-Ppr" appends="YES" id="EYu-wp-bHu"/>
+                            <outletCollection property="gestureRecognizers" destination="gea-gi-tbu" appends="YES" id="dY4-L0-bpF"/>
                         </connections>
                     </arView>
                     <connections>
@@ -28,6 +29,11 @@
                         <action selector="Tapping:" destination="BYZ-38-t0r" id="qrg-4t-7Ed"/>
                     </connections>
                 </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="gea-gi-tbu">
+                    <connections>
+                        <action selector="Dragging:" destination="BYZ-38-t0r" id="2bh-wk-hIf"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="138" y="134"/>
         </scene>
