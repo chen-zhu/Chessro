@@ -35,6 +35,14 @@ class GameViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.PeopleOcclusion()
+        let notificationList = ChessSceneAnchor.notifications.allNotifications.filter({
+            $0.identifier.hasPrefix("white")
+        })
+        print(notificationList)
+        let notificationList2 = ChessSceneAnchor.notifications.allNotifications.filter({
+            $0.identifier.hasPrefix("black")
+        })
+        print(notificationList2)
     }
     
     func PeopleOcclusion() {
