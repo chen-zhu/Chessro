@@ -178,6 +178,14 @@ class GameViewController: UIViewController {
             let OOD = reverseLookUp[piece.id]
             
             if(OOD != nil){
+                
+                //1. trigger the frontend
+                let notification = ChessSceneAnchor.notifications.allNotifications.filter({
+                    $0.identifier.hasPrefix(piece.name)
+                })
+                
+                notification.first?.post()
+                
                 let movableSet = OOD!.validStep(chessBoard: chessBoard)
                 
                 self.deleteMovableGrid()
