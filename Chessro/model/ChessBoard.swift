@@ -38,7 +38,13 @@ class ChessBoard{
         loadBoard()
     }
     
-    //TODO: figure out a way to map ARKit board to the ChessBoard!
+    /**
+     TODO: Mak it also handle the situation when enemy is killed
+     */
+    func changeChessPieceIndex(old_row: Int, old_col: Int, new_row: Int, new_col: Int){
+        self.ChessBoard[new_row][new_col] = self.ChessBoard[old_row][old_col]
+        self.ChessBoard[old_row][old_col] = nil
+    }
     
     
     func loadBoard(){

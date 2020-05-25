@@ -189,6 +189,21 @@ class GameViewController: UIViewController {
         }
     }
     
+    func moveChessPiece(chessPiece: Entity, to_row: Int, to_col: Int){
+        //1. update transform
+        var transform = chessPiece.transform
+        transform.translation = self.translate_pos(row: to_row, col: to_col)
+        tappedPiece!.move(to: transform, relativeTo: chessPiece.parent, duration: 0.5)
+        
+        //2. Update Chessboard OOD
+        var PieceOOD = reverseLookUp[chessPiece.id]
+        chessBoard.changeChessPieceIndex(old_row: PieceOOD!.row, old_col: PieceOOD!.column, new_row: to_row, new_col: to_col)
+        
+        //3. update piece OOD
+        PieceOOD!.row = to_row
+        PieceOOD!.column = to_col
+    }
+    
     /**
      Some pieces on the chessboard might have inaccurate position. Enforece the frontend to check pos for each pieces
      */
@@ -212,9 +227,7 @@ class GameViewController: UIViewController {
                     self.deleteMovableGrid()
                     return
                 }
-                
-                //TODO: do something to make it always vertical!
-                
+                                
                 //3. trigger the backend
                 let notification = ChessSceneAnchor.notifications.allNotifications.filter({
                     $0.identifier.hasPrefix(piece.name)
@@ -254,12 +267,7 @@ class GameViewController: UIViewController {
                         let tapped_index = self.translate_index(x: pos.x, y: pos.y, z: pos.z)
                         
                         if(movableSet.contains(tapped_index)){
-                            var transform = tappedPiece!.transform
-                            transform.translation = self.translate_pos(row: tapped_index.x, col: tapped_index.y)
-                            tappedPiece!.move(to: transform, relativeTo: tappedPiece!.parent, duration: 0.5)
-                            
-                            PieceOOD!.row = tapped_index.x
-                            PieceOOD!.column = tapped_index.y
+                            self.moveChessPiece(chessPiece: tappedPiece!, to_row: tapped_index.x, to_col: tapped_index.y)
                         }
                         
                         self.deleteMovableGrid()
@@ -290,14 +298,5 @@ class GameViewController: UIViewController {
             }
         }
     }
-    
-    
-    
-    /*func sphere(radius: Float, color: UIColor) -> ModelEntity {
-        let sphere = ModelEntity(mesh: .generateSphere(radius: radius), materials: [SimpleMaterial(color: color, isMetallic: false)])
-        // Move sphere up by half its diameter so that it does not intersect with the mesh
-        sphere.position.y = radius
-        return sphere
-    }*/
     
 }
