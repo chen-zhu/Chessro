@@ -913,7 +913,7 @@
                                         "configuration" : {
                                           "animationStyle" : "basic",
                                           "duration" : 1,
-                                          "emphasisAnimationType" : "float",
+                                          "emphasisAnimationType" : "bounce",
                                           "iterations" : 1,
                                           "target" : [
                                             "3A39EFB6-363B-443F-88E7-0F3297C86CFF"
@@ -3605,7 +3605,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -3695,7 +3695,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -3786,7 +3786,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -3876,7 +3876,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -3966,7 +3966,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -4077,7 +4077,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -4298,7 +4298,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -4388,7 +4388,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -4478,7 +4478,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -4568,7 +4568,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -4658,7 +4658,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -4748,7 +4748,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -4838,7 +4838,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -4949,7 +4949,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -5072,7 +5072,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -5163,7 +5163,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -5253,7 +5253,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -5343,7 +5343,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -5433,7 +5433,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -5523,7 +5523,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -5613,7 +5613,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -5703,7 +5703,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -5826,7 +5826,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -5917,7 +5917,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -6008,7 +6008,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -6098,7 +6098,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -6188,7 +6188,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -6278,7 +6278,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -6368,7 +6368,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -6548,7 +6548,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -6638,7 +6638,7 @@
                           "rigidBody-motionType",
                           {
                             "typeName" : "REMotionType",
-                            "value" : "dynamic"
+                            "value" : "static"
                           }
                         ]
                       ]
@@ -6680,21 +6680,21 @@
               "title" : "chessScene",
               "viewTransform" : {
                 "cameraTransform" : [
-                  0.028963638469576836,
-                  3.3527612686157227e-08,
-                  0.99958044290542603,
+                  -0.021243032068014145,
+                  3.3527616238870905e-08,
+                  0.99977433681488037,
                   0,
-                  0.55423849821090698,
-                  0.83220291137695312,
-                  -0.016059365123510361,
+                  0.84809517860412598,
+                  0.52953702211380005,
+                  0.018020322546362877,
                   0,
-                  -0.83185368776321411,
-                  0.55447125434875488,
-                  0.024103172123432159,
+                  -0.52941751480102539,
+                  0.84828680753707886,
+                  -0.011249428614974022,
                   0,
-                  -0.69352728128433228,
-                  0.35129052400588989,
-                  0.12587164342403412,
+                  -0.49216905236244202,
+                  0.60738509893417358,
+                  0.09529808908700943,
                   1
                 ],
                 "sceneTransform" : [
