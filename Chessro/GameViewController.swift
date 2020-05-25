@@ -22,11 +22,13 @@ class GameViewController: UIViewController {
     var reverseLookUp = [UInt64: ChessPiece]()
     
     var movableGrids = Array<ModelEntity>()
+    var tappedPiece: Entity?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         ChessSceneAnchor = try! Experience.loadChessScene()
+        arView.debugOptions = [ARView.DebugOptions.showFeaturePoints, ARView.DebugOptions.showWorldOrigin, ARView.DebugOptions.showAnchorOrigins]
         arView.scene.anchors.append(ChessSceneAnchor)//.
         
         self.LinkingEntities()
@@ -35,6 +37,7 @@ class GameViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.PeopleOcclusion()
+        tappedPiece = nil
         //let notificationList = ChessSceneAnchor.notifications.allNotifications.filter({
         //    $0.identifier.hasPrefix("white")
         //})
@@ -157,6 +160,21 @@ class GameViewController: UIViewController {
         return SIMD3(calc_col * Float(gridSize), y, 0 - calc_row * Float(gridSize))
     }
     
+    /**
+     This function auto translates the array index (row, col) to the actual coordinate on the AR sense ChessBoard.
+     */
+    func translate_index(x: Float, y: Float, z: Float) -> SIMD2<Int>{
+        let offset = 3.50
+        
+        var row = 0
+        var col = 0
+        
+        col = Int(round(x/Float(gridSize) + Float(offset)))
+        row = Int(round(-z/Float(gridSize) + Float(offset)))
+        
+        return SIMD2(row, col)
+    }
+    
     func drawMovableGrid(pos: SIMD3<Float>){
         let model = ModelEntity(mesh: .generatePlane(width: Float(gridSize - 0.02), depth: Float(gridSize - 0.02), cornerRadius: 0.7), materials: [SimpleMaterial.init(color: UIColor(red: 1, green: 0.7137, blue: 0, alpha: 0.8), isMetallic: false)])
         ChessSceneAnchor.addChild(model)
@@ -176,26 +194,88 @@ class GameViewController: UIViewController {
         
         if let piece = arView.entity(at: tapLocation){
             let OOD = reverseLookUp[piece.id]
-            
             if(OOD != nil){
+                print("[DEBUG] Tapped Piece pos", piece.position, "\n\n")
                 //1. enforce location anyway!
                 piece.position = self.translate_pos(row: OOD!.row, col: OOD!.column)
                 
+                //2. if still tapping itself, then remove!
+                if piece == tappedPiece{
+                    tappedPiece = nil
+                    self.deleteMovableGrid()
+                    return
+                }
+                
                 //TODO: do something to make it always vertical!
                 
-                //2. trigger the frontend
+                //3. trigger the backend
                 let notification = ChessSceneAnchor.notifications.allNotifications.filter({
                     $0.identifier.hasPrefix(piece.name)
                 })
-                
                 notification.first?.post()
                 
+                //4. draw movable grid on the board!
                 let movableSet = OOD!.validStep(chessBoard: chessBoard)
-                
                 self.deleteMovableGrid()
+                if movableSet.count > 0{
+                    tappedPiece = piece
+                    for pair in movableSet{
+                        self.drawMovableGrid(pos: self.translate_pos(row: pair.x, col: pair.y))
+                    }
+                }
                 
-                for pair in movableSet{
-                    self.drawMovableGrid(pos: self.translate_pos(row: pair.x, col: pair.y))
+            } else {
+                //it is possible that user tapped on the chessboard and making move!
+                let piece = arView.entity(at: tapLocation)
+                //taking action if one piece has been tapped!
+                if(piece?.name == "board" && tappedPiece != nil){
+                    //Raycast!
+                    //let result = arView.hitTest(tapLocation, types: .existingPlaneUsingExtent).first
+                    let result = arView.raycast(from: tapLocation, allowing: .existingPlaneGeometry, alignment: .any).first
+                    //print("[DEBUG]: ", arView.raycast(from: tapLocation, allowing: .existingPlaneGeometry, alignment: .any))
+                    
+                    if(result != nil){
+                        //print("[DEBUG]: Before Piece Transformation: \n \n", tappedPiece?.position, "\n\n")
+                        
+                        let notification = ChessSceneAnchor.notifications.allNotifications.filter({
+                            $0.identifier.hasPrefix(tappedPiece!.name)
+                        })
+                        
+                        //print(result!.anchor)
+                        //Somehow move does not work here!!!!
+                        //tappedPiece!.move(to: result!.worldTransform, relativeTo: nil, duration: 0.5)
+                        //tappedPiece!.position = self.translate_pos(row: 4, col: 4)
+                        
+                        let resultAnchor = AnchorEntity(world: result!.worldTransform)
+                        arView.scene.addAnchor(resultAnchor)
+                        var pos = resultAnchor.position(relativeTo: ChessSceneAnchor)
+                        arView.scene.removeAnchor(resultAnchor)
+                        //print("Tappped", pos)
+                        
+                        var PieceOOD = reverseLookUp[tappedPiece!.id]
+                        let movableSet = PieceOOD!.validStep(chessBoard: chessBoard)
+                        let tapped_index = self.translate_index(x: pos.x, y: pos.y, z: pos.z)
+                        
+                        if(movableSet.contains(tapped_index)){
+                            tappedPiece?.components.has(<#T##componentType: Component.Type##Component.Type#>)
+                            tappedPiece!.position = self.translate_pos(row: tapped_index.x, col: tapped_index.y)
+                            PieceOOD!.row = tapped_index.x
+                            PieceOOD!.column = tapped_index.y
+                            pos.y = Float(gridHeight)
+                            notification.first?.post()
+                        }
+                        
+                        self.deleteMovableGrid()
+                        
+                        //resultAnchor.addChild(sphere(radius: 0.01, color: .lightGray))
+                        //tappedPiece?.setParent(resultAnchor, preservingWorldTransform: false)
+                        
+                        //tappedPiece!.position.z = Float(gridHeight)
+                        //
+                        //print("[DEBUG]: After Piece Transformation: \n \n", tappedPiece?.position, "\n\n")
+                        //print("Position: ", tappedPiece?.position, "\n\n")
+                        
+                    }
                 }
                 
             }
@@ -222,5 +302,13 @@ class GameViewController: UIViewController {
         }
     }
     
+    
+    
+    /*func sphere(radius: Float, color: UIColor) -> ModelEntity {
+        let sphere = ModelEntity(mesh: .generateSphere(radius: radius), materials: [SimpleMaterial(color: color, isMetallic: false)])
+        // Move sphere up by half its diameter so that it does not intersect with the mesh
+        sphere.position.y = radius
+        return sphere
+    }*/
     
 }
