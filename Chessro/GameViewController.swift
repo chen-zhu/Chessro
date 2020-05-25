@@ -257,24 +257,18 @@ class GameViewController: UIViewController {
                         let tapped_index = self.translate_index(x: pos.x, y: pos.y, z: pos.z)
                         
                         if(movableSet.contains(tapped_index)){
-                            tappedPiece?.components.has(<#T##componentType: Component.Type##Component.Type#>)
                             tappedPiece!.position = self.translate_pos(row: tapped_index.x, col: tapped_index.y)
                             PieceOOD!.row = tapped_index.x
                             PieceOOD!.column = tapped_index.y
                             pos.y = Float(gridHeight)
                             notification.first?.post()
+                            
+                            print(tappedPiece)
+                            
                         }
                         
                         self.deleteMovableGrid()
-                        
-                        //resultAnchor.addChild(sphere(radius: 0.01, color: .lightGray))
-                        //tappedPiece?.setParent(resultAnchor, preservingWorldTransform: false)
-                        
-                        //tappedPiece!.position.z = Float(gridHeight)
-                        //
-                        //print("[DEBUG]: After Piece Transformation: \n \n", tappedPiece?.position, "\n\n")
-                        //print("Position: ", tappedPiece?.position, "\n\n")
-                        
+                        tappedPiece = nil
                     }
                 }
                 
