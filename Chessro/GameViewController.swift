@@ -147,6 +147,7 @@ class GameViewController: UIViewController {
         reverseLookUp[ChessSceneAnchor.blackpawneight!.id]  = chessBoard.ChessBoard[6][7]!
     }
     
+    // MARK: - ChessBoard Coordinate Translate
     /**
      This function auto translates the array index (row, col) to the actual coordinate on the AR sense ChessBoard.
      */
@@ -175,6 +176,9 @@ class GameViewController: UIViewController {
         return SIMD2(row, col)
     }
     
+    
+    // MARK: - Movable Grids
+    
     func drawMovableGrid(pos: SIMD3<Float>){
         let model = ModelEntity(mesh: .generatePlane(width: Float(gridSize - 0.02), depth: Float(gridSize - 0.02), cornerRadius: 0.7), materials: [SimpleMaterial.init(color: UIColor(red: 1, green: 0.7137, blue: 0, alpha: 0.8), isMetallic: false)])
         ChessSceneAnchor.addChild(model)
@@ -188,6 +192,8 @@ class GameViewController: UIViewController {
             ChessSceneAnchor.removeChild(removed)
         }
     }
+    
+    // MARK: - Moving Chess Pieces
     
     func moveChessPiece(chessPiece: Entity, to_row: Int, to_col: Int){
         //1. update transform
@@ -210,6 +216,9 @@ class GameViewController: UIViewController {
     func cleanChessboard(){
         
     }
+    
+    
+    // MARK: - Tapping Guesture
     
     @IBAction func Tapping(_ sender: UITapGestureRecognizer) {
         let tapLocation = sender.location(in: arView)
@@ -280,6 +289,9 @@ class GameViewController: UIViewController {
         
     }
     
+    // MARK: - Dragging Guesture
+    //var draggingEntity: Entity?
+    
     @IBAction func Dragging(_ sender: UIPanGestureRecognizer) {
         let tapLocation = sender.location(in: arView)
         
@@ -289,10 +301,73 @@ class GameViewController: UIViewController {
             switch sender.state {
                 case .began:
                     print("Object began to move")
+                    tappedPiece = piece
                 case .changed:
                     print("Moving object position changed")
-                case .ended:
+                    let result = arView.raycast(from: tapLocation, allowing: .existingPlaneGeometry, alignment: .any).first
+                    
+                    if(result != nil){
+                        //no need to move by the grid here!
+                        
+                        //One stupid way to translate worldTransform to position
+                        let resultAnchor = AnchorEntity(world: result!.worldTransform)
+                        arView.scene.addAnchor(resultAnchor)
+                        var pos = resultAnchor.position(relativeTo: ChessSceneAnchor)
+                        arView.scene.removeAnchor(resultAnchor)
+                        
+                        pos.y = Float(gridHeight) + 0.01
+                        var transform = tappedPiece!.transform
+                        transform.translation = pos
+                        tappedPiece!.move(to: transform, relativeTo: tappedPiece!.parent)
+                        
+                        //var PieceOOD = reverseLookUp[tappedPiece!.id]
+                        //let movableSet = PieceOOD!.validStep(chessBoard: chessBoard)
+                        //let tapped_index = self.translate_index(x: pos.x, y: pos.y, z: pos.z)
+                        //self.moveChessPiece(chessPiece: tappedPiece!, to_row: tapped_index.x, to_col: tapped_index.y)
+                        
+                        //print("Taped Index: ", tapped_index)
+                    }
+                    /*let dragTrans = sender.translation(in: self.arView)
+                    let currentPosition = self.arView.project(tappedPiece!.position)
+                    let updatedPosition = CGPoint(x: currentPosition!.x + dragTrans.x, y: currentPosition!.y + dragTrans.y)
+                    
+                    let result = arView.raycast(from: updatedPosition, allowing: .existingPlaneGeometry, alignment: .any).first
+                    
+                    print("tapLocation", tapLocation)
+                    print("updatedPosition: ", updatedPosition)
+                    print("Hittest Pos: ", result)
+                
+                    sender.setTranslation(.zero, in: arView)
+                    */
+                    //update position here
+                    //let dragTrans = sender.translation(in: arView)
+                    //tappedPiece!.position += SIMD3(dragTrans.x, dragTrans.y, dragTrans.)
+                
+                    
+                    /*let translation = recognizer.translation(in: self), let entity = recognizer.entity else { return }
+                    entity.position += translation
+                    recognizer.setTranslation(.zero, in: self)
+                    if let coords = coordinates(from: entity.position) {
+                        showFocusEntity(moveFocusEntity, at: coords)
+                    } else {
+                        moveFocusEntity.removeFromParent()
+                    }*/
+                case .cancelled, .failed, .ended:
                     print("Done moving object")
+                    //1. put down object!
+                    var PieceOOD = reverseLookUp[tappedPiece!.id]
+                    let movableSet = PieceOOD!.validStep(chessBoard: chessBoard)
+                    let tapped_index = self.translate_index(x: tappedPiece!.position.x, y: tappedPiece!.position.y, z: tappedPiece!.position.z)
+                    
+                    if(movableSet.contains(tapped_index)){
+                        self.moveChessPiece(chessPiece: tappedPiece!, to_row: tapped_index.x, to_col: tapped_index.y)
+                    } else {
+                        self.moveChessPiece(chessPiece: tappedPiece!, to_row: PieceOOD!.row, to_col: PieceOOD!.column)
+                    }
+                
+                    //2. reset object
+                    tappedPiece = nil
+                
                 default:
                     break
             }
