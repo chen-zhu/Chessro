@@ -22,6 +22,8 @@ protocol ChessPiece {
     
     var killed: Bool{ get set }
     
+    var firstMove: Bool{ get set }
+    
     /**
      make sure to pass the reference from reality composer to this variable!
      */

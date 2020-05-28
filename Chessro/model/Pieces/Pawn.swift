@@ -22,7 +22,7 @@ class Pawn: ChessPiece{
     
     var ARObject: Entity
     
-    var init_pos = true
+    var firstMove = true
     
     init(setColor: color, r_pos: Int, c_pos: Int) {
         self.PieceColor = setColor
@@ -44,7 +44,7 @@ class Pawn: ChessPiece{
         //If the forawrd position is numm, then move!
         if chessBoard.ChessBoard[checkRow][checkCol] == nil {
             result.append([checkRow, checkCol])
-            if init_pos {
+            if firstMove {
                 let moreStep = checkRow + direction
                 if chessBoard.ChessBoard[moreStep][checkCol] == nil {
                     result.append([moreStep, checkCol])

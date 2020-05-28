@@ -22,6 +22,8 @@ class King: ChessPiece{
     
     var ARObject: Entity
     
+    var firstMove = true
+    
     init(setColor: color, r_pos: Int, c_pos: Int) {
         self.PieceColor = setColor
         self.type = .king

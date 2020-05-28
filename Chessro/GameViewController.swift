@@ -195,7 +195,7 @@ class GameViewController: UIViewController {
     
     // MARK: - Moving Chess Pieces
     
-    func moveChessPiece(chessPiece: Entity, to_row: Int, to_col: Int){
+    func moveChessPiece(chessPiece: Entity, to_row: Int, to_col: Int, newMove: Bool = true){
         //1. update transform
         var transform = chessPiece.transform
         transform.translation = self.translate_pos(row: to_row, col: to_col)
@@ -208,6 +208,11 @@ class GameViewController: UIViewController {
         //3. update piece OOD
         PieceOOD!.row = to_row
         PieceOOD!.column = to_col
+        
+        //only update if the move is a new move!
+        if newMove {
+            PieceOOD!.firstMove = false
+        }
     }
     
     /**
@@ -301,14 +306,14 @@ class GameViewController: UIViewController {
             switch sender.state {
                 case .began:
                     print("Object began to move")
+                    self.deleteMovableGrid()
                     tappedPiece = piece
                 case .changed:
                     print("Moving object position changed")
                     let result = arView.raycast(from: tapLocation, allowing: .existingPlaneGeometry, alignment: .any).first
                     
+                    //no need to move by the grid here!
                     if(result != nil){
-                        //no need to move by the grid here!
-                        
                         //One stupid way to translate worldTransform to position
                         let resultAnchor = AnchorEntity(world: result!.worldTransform)
                         arView.scene.addAnchor(resultAnchor)
@@ -319,39 +324,8 @@ class GameViewController: UIViewController {
                         var transform = tappedPiece!.transform
                         transform.translation = pos
                         tappedPiece!.move(to: transform, relativeTo: tappedPiece!.parent)
-                        
-                        //var PieceOOD = reverseLookUp[tappedPiece!.id]
-                        //let movableSet = PieceOOD!.validStep(chessBoard: chessBoard)
-                        //let tapped_index = self.translate_index(x: pos.x, y: pos.y, z: pos.z)
-                        //self.moveChessPiece(chessPiece: tappedPiece!, to_row: tapped_index.x, to_col: tapped_index.y)
-                        
-                        //print("Taped Index: ", tapped_index)
                     }
-                    /*let dragTrans = sender.translation(in: self.arView)
-                    let currentPosition = self.arView.project(tappedPiece!.position)
-                    let updatedPosition = CGPoint(x: currentPosition!.x + dragTrans.x, y: currentPosition!.y + dragTrans.y)
-                    
-                    let result = arView.raycast(from: updatedPosition, allowing: .existingPlaneGeometry, alignment: .any).first
-                    
-                    print("tapLocation", tapLocation)
-                    print("updatedPosition: ", updatedPosition)
-                    print("Hittest Pos: ", result)
                 
-                    sender.setTranslation(.zero, in: arView)
-                    */
-                    //update position here
-                    //let dragTrans = sender.translation(in: arView)
-                    //tappedPiece!.position += SIMD3(dragTrans.x, dragTrans.y, dragTrans.)
-                
-                    
-                    /*let translation = recognizer.translation(in: self), let entity = recognizer.entity else { return }
-                    entity.position += translation
-                    recognizer.setTranslation(.zero, in: self)
-                    if let coords = coordinates(from: entity.position) {
-                        showFocusEntity(moveFocusEntity, at: coords)
-                    } else {
-                        moveFocusEntity.removeFromParent()
-                    }*/
                 case .cancelled, .failed, .ended:
                     print("Done moving object")
                     //1. put down object!
@@ -362,10 +336,11 @@ class GameViewController: UIViewController {
                     if(movableSet.contains(tapped_index)){
                         self.moveChessPiece(chessPiece: tappedPiece!, to_row: tapped_index.x, to_col: tapped_index.y)
                     } else {
-                        self.moveChessPiece(chessPiece: tappedPiece!, to_row: PieceOOD!.row, to_col: PieceOOD!.column)
+                        self.moveChessPiece(chessPiece: tappedPiece!, to_row: PieceOOD!.row, to_col: PieceOOD!.column, newMove: false)
                     }
                 
                     //2. reset object
+                    self.deleteMovableGrid()
                     tappedPiece = nil
                 
                 default:
