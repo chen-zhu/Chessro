@@ -44,6 +44,9 @@ class ChessBoard{
     func changeChessPieceIndex(old_row: Int, old_col: Int, new_row: Int, new_col: Int){
         self.ChessBoard[new_row][new_col] = self.ChessBoard[old_row][old_col]
         self.ChessBoard[old_row][old_col] = nil
+        
+        print("Chessboard Old Position: ", old_row, old_col, self.ChessBoard[old_row][old_col])
+        print("Chessboard New Position: ", new_row, new_col, self.ChessBoard[new_row][new_col])
     }
     
     

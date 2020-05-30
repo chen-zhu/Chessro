@@ -20,7 +20,7 @@ class Pawn: ChessPiece{
     
     var killed: Bool
     
-    var ARObject: Entity
+    var ARObject: Entity?
     
     var firstMove = true
     
@@ -73,6 +73,7 @@ class Pawn: ChessPiece{
             }
         }
         
+        //print("Pawn Tapped: current row + col", row, column, "\nMovable Result: \n", result)
         return result
     }
     
