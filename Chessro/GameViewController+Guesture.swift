@@ -18,6 +18,8 @@ extension GameViewController: UIGestureRecognizerDelegate {
         
         if let piece = arView.entity(at: tapLocation){
             let OOD = reverseLookUp[piece.name]
+            
+            //If OOD can be found, then ppl tapped on the ChessPiece!
             if(OOD != nil){
                 print("[DEBUG] Tapped Piece pos", piece.position, "\n\n")
                 //1. enforce location anyway!
@@ -29,7 +31,23 @@ extension GameViewController: UIGestureRecognizerDelegate {
                     self.deleteMovableGrid()
                     return
                 }
-                                
+                
+                //Detect if the tapped piece is killable or not.
+                if(tappedPiece != nil){
+                    let OldtappedOOD = reverseLookUp[tappedPiece!.name]
+                    let OldtappedMovableSet = OldtappedOOD!.validStep(chessBoard: chessBoard)
+                    if(OldtappedMovableSet.contains(SIMD2(OOD!.row, OOD!.column))){
+                        print("[DEBUG] Tapping - Allowed to kill!")
+                        self.moveChessPiece(chessPiece: tappedPiece!, to_row: OOD!.row, to_col: OOD!.column)
+                        
+                        //actually we can stop here~
+                        self.deleteMovableGrid()
+                        tappedPiece = nil
+                        return
+                    }
+                }
+                
+                //ELSE, NOT KILLABLE, THEN reselect Chesspiece here!
                 //3. trigger the backend
                 let notification = ChessSceneAnchor.notifications.allNotifications.filter({
                     $0.identifier.hasPrefix(piece.name)
@@ -46,10 +64,12 @@ extension GameViewController: UIGestureRecognizerDelegate {
                     }
                 }
                 
+            
             } else {
-                //it is possible that user tapped on the chessboard and making move!
+                //Else, it is possible that user tapped on the chessboard and making move!
                 let piece = arView.entity(at: tapLocation)
-                //taking action if one piece has been tapped!
+                
+                //If tapping on board, move to that position!
                 if(piece?.name == "board" && tappedPiece != nil){
                     //Raycast!
                     let result = arView.raycast(from: tapLocation, allowing: .existingPlaneGeometry, alignment: .any).first

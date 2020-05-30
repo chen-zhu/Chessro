@@ -41,6 +41,8 @@ class Pawn: ChessPiece{
         let checkRow = row + direction
         let checkCol = column
         
+        guard checkRow < 8 && checkRow >= 0 else { return result }
+        
         //If the forawrd position is numm, then move!
         if chessBoard.ChessBoard[checkRow][checkCol] == nil {
             result.append([checkRow, checkCol])
