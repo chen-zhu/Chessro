@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD23F64C248316C5000B38E2 /* GameViewController+Guesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD23F64B248316C5000B38E2 /* GameViewController+Guesture.swift */; };
 		DD515A1924730F6D009FEBED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515A1824730F6D009FEBED /* AppDelegate.swift */; };
 		DD515A1B24730F6D009FEBED /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515A1A24730F6D009FEBED /* GameViewController.swift */; };
 		DD515A1E24730F6D009FEBED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD515A1C24730F6D009FEBED /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD23F64B248316C5000B38E2 /* GameViewController+Guesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+Guesture.swift"; sourceTree = "<group>"; };
 		DD515A1524730F6D009FEBED /* Chessro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chessro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD515A1824730F6D009FEBED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD515A1A24730F6D009FEBED /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				DD515A2C247339DD009FEBED /* model */,
 				DD515A1824730F6D009FEBED /* AppDelegate.swift */,
 				DD515A1A24730F6D009FEBED /* GameViewController.swift */,
+				DD23F64B248316C5000B38E2 /* GameViewController+Guesture.swift */,
 				DD515A1C24730F6D009FEBED /* Main.storyboard */,
 				DD515A1F24730F6D009FEBED /* Experience.rcproject */,
 				DD515A2124730F6E009FEBED /* Assets.xcassets */,
@@ -181,6 +184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD23F64C248316C5000B38E2 /* GameViewController+Guesture.swift in Sources */,
 				DD515A3724734567009FEBED /* Rook.swift in Sources */,
 				DD515A3024733EBE009FEBED /* Definition.swift in Sources */,
 				DD515A322473446B009FEBED /* ChessBoard.swift in Sources */,
