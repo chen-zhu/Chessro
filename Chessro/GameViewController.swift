@@ -245,6 +245,7 @@ class GameViewController: UIViewController {
     /**
      Some pieces on the chessboard might have inaccurate position. Enforece the frontend to check pos for each pieces
      */
+    //TODO: This is too expensive to put in place
     func cleanChessboard(){
         
     }
