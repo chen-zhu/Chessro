@@ -19,7 +19,7 @@ class GameViewController: UIViewController {
     
     var chessBoard = ChessBoard()
     var ChessSceneAnchor = try! Experience.loadChessScene()
-    var reverseLookUp = [UInt64: ChessPiece]()
+    var reverseLookUp = [String: ChessPiece]()
     
     var movableGrids = Array<ModelEntity>()
     var tappedPiece: Entity?
@@ -70,7 +70,9 @@ class GameViewController: UIViewController {
     func LinkingEntities(){
         //Link white pieces
         
-        // Not In Use ATM
+        //OMG IT LOOKS SOOOO DUMMM
+        //TODO: COME UP WITH A BETTER WAY TO HADNLE IT!
+        //Map Piece OOD to Entity
         /*
         chessBoard.ChessBoard[0][0]?.ARObject = ChessSceneAnchor.whiterookone!;
         chessBoard.ChessBoard[0][1]?.ARObject = ChessSceneAnchor.whiteknightone!;
@@ -110,41 +112,42 @@ class GameViewController: UIViewController {
         chessBoard.ChessBoard[6][7]?.ARObject = ChessSceneAnchor.blackpawneight!;
         */
         
-        reverseLookUp[ChessSceneAnchor.whiterookone!.id]    = chessBoard.ChessBoard[0][0]!
-        reverseLookUp[ChessSceneAnchor.whiteknightone!.id]  = chessBoard.ChessBoard[0][1]!
-        reverseLookUp[ChessSceneAnchor.whitebishopone!.id]  = chessBoard.ChessBoard[0][2]!
-        reverseLookUp[ChessSceneAnchor.whitequeen!.id]      = chessBoard.ChessBoard[0][3]!
-        reverseLookUp[ChessSceneAnchor.whiteking!.id]       = chessBoard.ChessBoard[0][4]!
-        reverseLookUp[ChessSceneAnchor.whitebishoptwo!.id]  = chessBoard.ChessBoard[0][5]!
-        reverseLookUp[ChessSceneAnchor.whiteknighttwo!.id]  = chessBoard.ChessBoard[0][6]!
-        reverseLookUp[ChessSceneAnchor.whiterooktwo!.id]    = chessBoard.ChessBoard[0][7]!
+        //map Piece Entity to OOD
+        reverseLookUp[ChessSceneAnchor.whiterookone!.name]    = chessBoard.ChessBoard[0][0]!
+        reverseLookUp[ChessSceneAnchor.whiteknightone!.name]  = chessBoard.ChessBoard[0][1]!
+        reverseLookUp[ChessSceneAnchor.whitebishopone!.name]  = chessBoard.ChessBoard[0][2]!
+        reverseLookUp[ChessSceneAnchor.whitequeen!.name]      = chessBoard.ChessBoard[0][3]!
+        reverseLookUp[ChessSceneAnchor.whiteking!.name]       = chessBoard.ChessBoard[0][4]!
+        reverseLookUp[ChessSceneAnchor.whitebishoptwo!.name]  = chessBoard.ChessBoard[0][5]!
+        reverseLookUp[ChessSceneAnchor.whiteknighttwo!.name]  = chessBoard.ChessBoard[0][6]!
+        reverseLookUp[ChessSceneAnchor.whiterooktwo!.name]    = chessBoard.ChessBoard[0][7]!
         
-        reverseLookUp[ChessSceneAnchor.whitepawnone!.id]    = chessBoard.ChessBoard[1][0]!
-        reverseLookUp[ChessSceneAnchor.whitepawntwo!.id]    = chessBoard.ChessBoard[1][1]!
-        reverseLookUp[ChessSceneAnchor.whitepawnthree!.id]  = chessBoard.ChessBoard[1][2]!
-        reverseLookUp[ChessSceneAnchor.whitepawnfour!.id]   = chessBoard.ChessBoard[1][3]!
-        reverseLookUp[ChessSceneAnchor.whitepawnfive!.id]   = chessBoard.ChessBoard[1][4]!
-        reverseLookUp[ChessSceneAnchor.whitepawnsix!.id]    = chessBoard.ChessBoard[1][5]!
-        reverseLookUp[ChessSceneAnchor.whitepawnseven!.id]  = chessBoard.ChessBoard[1][6]!
-        reverseLookUp[ChessSceneAnchor.whitepawneight!.id]  = chessBoard.ChessBoard[1][7]!
+        reverseLookUp[ChessSceneAnchor.whitepawnone!.name]    = chessBoard.ChessBoard[1][0]!
+        reverseLookUp[ChessSceneAnchor.whitepawntwo!.name]    = chessBoard.ChessBoard[1][1]!
+        reverseLookUp[ChessSceneAnchor.whitepawnthree!.name]  = chessBoard.ChessBoard[1][2]!
+        reverseLookUp[ChessSceneAnchor.whitepawnfour!.name]   = chessBoard.ChessBoard[1][3]!
+        reverseLookUp[ChessSceneAnchor.whitepawnfive!.name]   = chessBoard.ChessBoard[1][4]!
+        reverseLookUp[ChessSceneAnchor.whitepawnsix!.name]    = chessBoard.ChessBoard[1][5]!
+        reverseLookUp[ChessSceneAnchor.whitepawnseven!.name]  = chessBoard.ChessBoard[1][6]!
+        reverseLookUp[ChessSceneAnchor.whitepawneight!.name]  = chessBoard.ChessBoard[1][7]!
         
-        reverseLookUp[ChessSceneAnchor.blackrookone!.id]    = chessBoard.ChessBoard[7][0]!
-        reverseLookUp[ChessSceneAnchor.blackknightone!.id]  = chessBoard.ChessBoard[7][1]!
-        reverseLookUp[ChessSceneAnchor.blackbishopone!.id]  = chessBoard.ChessBoard[7][2]!
-        reverseLookUp[ChessSceneAnchor.blackqueen!.id]      = chessBoard.ChessBoard[7][3]!
-        reverseLookUp[ChessSceneAnchor.blackking!.id]       = chessBoard.ChessBoard[7][4]!
-        reverseLookUp[ChessSceneAnchor.blackbishoptwo!.id]  = chessBoard.ChessBoard[7][5]!
-        reverseLookUp[ChessSceneAnchor.blackknighttwo!.id]  = chessBoard.ChessBoard[7][6]!
-        reverseLookUp[ChessSceneAnchor.blackrooktwo!.id]    = chessBoard.ChessBoard[7][7]!
+        reverseLookUp[ChessSceneAnchor.blackrookone!.name]    = chessBoard.ChessBoard[7][0]!
+        reverseLookUp[ChessSceneAnchor.blackknightone!.name]  = chessBoard.ChessBoard[7][1]!
+        reverseLookUp[ChessSceneAnchor.blackbishopone!.name]  = chessBoard.ChessBoard[7][2]!
+        reverseLookUp[ChessSceneAnchor.blackqueen!.name]      = chessBoard.ChessBoard[7][3]!
+        reverseLookUp[ChessSceneAnchor.blackking!.name]       = chessBoard.ChessBoard[7][4]!
+        reverseLookUp[ChessSceneAnchor.blackbishoptwo!.name]  = chessBoard.ChessBoard[7][5]!
+        reverseLookUp[ChessSceneAnchor.blackknighttwo!.name]  = chessBoard.ChessBoard[7][6]!
+        reverseLookUp[ChessSceneAnchor.blackrooktwo!.name]    = chessBoard.ChessBoard[7][7]!
         
-        reverseLookUp[ChessSceneAnchor.blackpawnone!.id]    = chessBoard.ChessBoard[6][0]!
-        reverseLookUp[ChessSceneAnchor.blackpawntwo!.id]    = chessBoard.ChessBoard[6][1]!
-        reverseLookUp[ChessSceneAnchor.blackpawnthree!.id]  = chessBoard.ChessBoard[6][2]!
-        reverseLookUp[ChessSceneAnchor.blackpawnfour!.id]   = chessBoard.ChessBoard[6][3]!
-        reverseLookUp[ChessSceneAnchor.blackpawnfive!.id]   = chessBoard.ChessBoard[6][4]!
-        reverseLookUp[ChessSceneAnchor.blackpawnsix!.id]    = chessBoard.ChessBoard[6][5]!
-        reverseLookUp[ChessSceneAnchor.blackpawnseven!.id]  = chessBoard.ChessBoard[6][6]!
-        reverseLookUp[ChessSceneAnchor.blackpawneight!.id]  = chessBoard.ChessBoard[6][7]!
+        reverseLookUp[ChessSceneAnchor.blackpawnone!.name]    = chessBoard.ChessBoard[6][0]!
+        reverseLookUp[ChessSceneAnchor.blackpawntwo!.name]    = chessBoard.ChessBoard[6][1]!
+        reverseLookUp[ChessSceneAnchor.blackpawnthree!.name]  = chessBoard.ChessBoard[6][2]!
+        reverseLookUp[ChessSceneAnchor.blackpawnfour!.name]   = chessBoard.ChessBoard[6][3]!
+        reverseLookUp[ChessSceneAnchor.blackpawnfive!.name]   = chessBoard.ChessBoard[6][4]!
+        reverseLookUp[ChessSceneAnchor.blackpawnsix!.name]    = chessBoard.ChessBoard[6][5]!
+        reverseLookUp[ChessSceneAnchor.blackpawnseven!.name]  = chessBoard.ChessBoard[6][6]!
+        reverseLookUp[ChessSceneAnchor.blackpawneight!.name]  = chessBoard.ChessBoard[6][7]!
     }
     
     // MARK: - ChessBoard Coordinate Translate
@@ -180,7 +183,7 @@ class GameViewController: UIViewController {
     // MARK: - Movable Grids
     
     func drawMovableGrid(pos: SIMD3<Float>){
-        let model = ModelEntity(mesh: .generatePlane(width: Float(gridSize - 0.02), depth: Float(gridSize - 0.02), cornerRadius: 0.7), materials: [SimpleMaterial.init(color: UIColor(red: 1, green: 0.7137, blue: 0, alpha: 0.8), isMetallic: false)])
+        let model = ModelEntity(mesh: .generatePlane(width: Float(gridSize - 0.01), depth: Float(gridSize - 0.01), cornerRadius: 0.7), materials: [SimpleMaterial.init(color: UIColor(red: 1, green: 0.7137, blue: 0, alpha: 0.8), isMetallic: false)])
         ChessSceneAnchor.addChild(model)
         model.position = pos
         movableGrids.append(model)
@@ -197,13 +200,18 @@ class GameViewController: UIViewController {
     
     func moveChessPiece(chessPiece: Entity, to_row: Int, to_col: Int, newMove: Bool = true){
         //1. update transform
+        var PieceOOD = reverseLookUp[chessPiece.name]
         var transform = chessPiece.transform
         transform.translation = self.translate_pos(row: to_row, col: to_col)
         tappedPiece!.move(to: transform, relativeTo: chessPiece.parent, duration: 0.5)
         
-        //2. Update Chessboard OOD
-        var PieceOOD = reverseLookUp[chessPiece.id]
-        chessBoard.changeChessPieceIndex(old_row: PieceOOD!.row, old_col: PieceOOD!.column, new_row: to_row, new_col: to_col)
+        //1.5 perform killing if enemy exist.
+        self.tryKillChessPiece(chessPiece: chessPiece, to_row: to_row, to_col: to_col)
+        
+        //2. Update Chessboard OOD ONLY IF CORD CHANGES!
+        if(PieceOOD!.row != to_row || PieceOOD!.column != to_col){
+            chessBoard.changeChessPieceIndex(old_row: PieceOOD!.row, old_col: PieceOOD!.column, new_row: to_row, new_col: to_col)
+        }
         
         //3. update piece OOD
         PieceOOD!.row = to_row
@@ -216,6 +224,25 @@ class GameViewController: UIViewController {
     }
     
     /**
+     Look up the AR entity by OOD (that uses ChesPiece protocol!)
+     Protocol does not allow us to do direct search!
+     */
+    func entityNameByOOD(OOD: ChessPiece) -> Entity?{
+        for item in reverseLookUp {
+            if(
+                item.value.PieceColor == OOD.PieceColor
+                && item.value.column == OOD.column
+                && item.value.row == OOD.row
+                && item.value.type == OOD.type
+            ){
+                return ChessSceneAnchor.findEntity(named: item.key)
+            }
+        }
+        return nil
+    }
+    
+    
+    /**
      Some pieces on the chessboard might have inaccurate position. Enforece the frontend to check pos for each pieces
      */
     func cleanChessboard(){
@@ -223,13 +250,28 @@ class GameViewController: UIViewController {
     }
     
     
+    // MARK: - Killing Chess Pieces
+    
+    /**
+     Before moving pieces here, kill the existing piece first. Ow, no killing, just setting variables!
+     */
+    func tryKillChessPiece(chessPiece: Entity, to_row: Int, to_col: Int){
+        //TODO: Add animation here!
+        let sittingOOD = chessBoard.ChessBoard[to_row][to_col]
+        let PieceOOD = reverseLookUp[chessPiece.name]
+        if(sittingOOD != nil && sittingOOD?.PieceColor != PieceOOD?.PieceColor){
+            var sittingEntity = self.entityNameByOOD(OOD: sittingOOD as! ChessPiece)
+            sittingEntity!.isEnabled = false
+        }
+    }
+    
     // MARK: - Tapping Guesture
     
     @IBAction func Tapping(_ sender: UITapGestureRecognizer) {
         let tapLocation = sender.location(in: arView)
         
         if let piece = arView.entity(at: tapLocation){
-            let OOD = reverseLookUp[piece.id]
+            let OOD = reverseLookUp[piece.name]
             if(OOD != nil){
                 print("[DEBUG] Tapped Piece pos", piece.position, "\n\n")
                 //1. enforce location anyway!
@@ -273,10 +315,10 @@ class GameViewController: UIViewController {
                         
                         let resultAnchor = AnchorEntity(world: result!.worldTransform)
                         arView.scene.addAnchor(resultAnchor)
-                        var pos = resultAnchor.position(relativeTo: ChessSceneAnchor)
+                        let pos = resultAnchor.position(relativeTo: ChessSceneAnchor)
                         arView.scene.removeAnchor(resultAnchor)
                         
-                        var PieceOOD = reverseLookUp[tappedPiece!.id]
+                        let PieceOOD = reverseLookUp[tappedPiece!.name]
                         let movableSet = PieceOOD!.validStep(chessBoard: chessBoard)
                         let tapped_index = self.translate_index(x: pos.x, y: pos.y, z: pos.z)
                         
@@ -299,50 +341,54 @@ class GameViewController: UIViewController {
     
     @IBAction func Dragging(_ sender: UIPanGestureRecognizer) {
         let tapLocation = sender.location(in: arView)
-        
-        if let piece = arView.entity(at: tapLocation){
-            let OOD = reverseLookUp[piece.id]
-            
+        let piece = arView.entity(at: tapLocation)
+        if piece != nil {
+            _ = reverseLookUp[piece!.name]
+                        
             switch sender.state {
                 case .began:
                     print("Object began to move")
                     self.deleteMovableGrid()
-                    tappedPiece = piece
+                    if(piece!.name != "board"){
+                        tappedPiece = piece
+                    }
                 case .changed:
                     print("Moving object position changed")
-                    let result = arView.raycast(from: tapLocation, allowing: .existingPlaneGeometry, alignment: .any).first
-                    
-                    //no need to move by the grid here!
-                    if(result != nil){
-                        //One stupid way to translate worldTransform to position
-                        let resultAnchor = AnchorEntity(world: result!.worldTransform)
-                        arView.scene.addAnchor(resultAnchor)
-                        var pos = resultAnchor.position(relativeTo: ChessSceneAnchor)
-                        arView.scene.removeAnchor(resultAnchor)
+                    if(tappedPiece != nil){
+                        let result = arView.raycast(from: tapLocation, allowing: .existingPlaneGeometry, alignment: .any).first
                         
-                        pos.y = Float(gridHeight) + 0.01
-                        var transform = tappedPiece!.transform
-                        transform.translation = pos
-                        tappedPiece!.move(to: transform, relativeTo: tappedPiece!.parent)
+                        //no need to move by the grid here!
+                        if(result != nil){
+                            //One stupid way to translate worldTransform to position
+                            let resultAnchor = AnchorEntity(world: result!.worldTransform)
+                            arView.scene.addAnchor(resultAnchor)
+                            var pos = resultAnchor.position(relativeTo: ChessSceneAnchor)
+                            arView.scene.removeAnchor(resultAnchor)
+                            
+                            pos.y = Float(gridHeight) + 0.01
+                            var transform = tappedPiece!.transform
+                            transform.translation = pos
+                            tappedPiece!.move(to: transform, relativeTo: tappedPiece!.parent)
+                        }
                     }
-                
                 case .cancelled, .failed, .ended:
                     print("Done moving object")
-                    //1. put down object!
-                    var PieceOOD = reverseLookUp[tappedPiece!.id]
-                    let movableSet = PieceOOD!.validStep(chessBoard: chessBoard)
-                    let tapped_index = self.translate_index(x: tappedPiece!.position.x, y: tappedPiece!.position.y, z: tappedPiece!.position.z)
-                    
-                    if(movableSet.contains(tapped_index)){
-                        self.moveChessPiece(chessPiece: tappedPiece!, to_row: tapped_index.x, to_col: tapped_index.y)
-                    } else {
-                        self.moveChessPiece(chessPiece: tappedPiece!, to_row: PieceOOD!.row, to_col: PieceOOD!.column, newMove: false)
+                    if(tappedPiece != nil){
+                        //1. put down object!
+                        let PieceOOD = reverseLookUp[tappedPiece!.name]
+                        let movableSet = PieceOOD!.validStep(chessBoard: chessBoard)
+                        let tapped_index = self.translate_index(x: tappedPiece!.position.x, y: tappedPiece!.position.y, z: tappedPiece!.position.z)
+                        
+                        if(movableSet.contains(tapped_index)){
+                            self.moveChessPiece(chessPiece: tappedPiece!, to_row: tapped_index.x, to_col: tapped_index.y)
+                        } else {
+                            print("resume original position!")
+                            self.moveChessPiece(chessPiece: tappedPiece!, to_row: PieceOOD!.row, to_col: PieceOOD!.column, newMove: false)
+                        }
                     }
-                
                     //2. reset object
                     self.deleteMovableGrid()
                     tappedPiece = nil
-                
                 default:
                     break
             }
