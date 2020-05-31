@@ -14,7 +14,12 @@ extension GameViewController: UIGestureRecognizerDelegate {
     
     // MARK: - Tapping Guesture
     @IBAction func Tapping(_ sender: UITapGestureRecognizer) {
-        print("Current Round Number:", roundNumber)
+        if(gameEnd){
+            print("Game End Status Detected.")
+            return
+        }
+        
+        print("[DEBUG] Current Round Number:", roundNumber)
         let tapLocation = sender.location(in: arView)
         
         if let piece = arView.entity(at: tapLocation){
@@ -112,6 +117,11 @@ extension GameViewController: UIGestureRecognizerDelegate {
     // MARK: - Dragging Guesture
     //var draggingEntity: Entity?
     @IBAction func Dragging(_ sender: UIPanGestureRecognizer) {
+        if(gameEnd){
+            print("Game End Status Detected.")
+            return
+        }
+        
         let tapLocation = sender.location(in: arView)
         let piece = arView.entity(at: tapLocation)
         if piece != nil {

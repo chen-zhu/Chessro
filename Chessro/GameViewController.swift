@@ -23,12 +23,13 @@ class GameViewController: UIViewController {
     var movableGrids = Array<ModelEntity>()
     var tappedPiece: Entity?
     var roundNumber = 1 //mod 1 -> white, 0 -> black
+    var gameEnd = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         ChessSceneAnchor = try! Experience.loadChessScene()
-        arView.debugOptions = [ARView.DebugOptions.showFeaturePoints, ARView.DebugOptions.showWorldOrigin, ARView.DebugOptions.showAnchorOrigins]
+        //arView.debugOptions = [ARView.DebugOptions.showFeaturePoints, ARView.DebugOptions.showWorldOrigin, ARView.DebugOptions.showAnchorOrigins]
         arView.scene.anchors.append(ChessSceneAnchor)//.
         
         self.LinkingEntities()
@@ -68,49 +69,8 @@ class GameViewController: UIViewController {
     }
     
     func LinkingEntities(){
-        //Link white pieces
-        
         //OMG IT LOOKS SOOOO DUMMM
         //TODO: COME UP WITH A BETTER WAY TO HADNLE IT!
-        //Map Piece OOD to Entity
-        /*
-        chessBoard.ChessBoard[0][0]?.ARObject = ChessSceneAnchor.whiterookone!;
-        chessBoard.ChessBoard[0][1]?.ARObject = ChessSceneAnchor.whiteknightone!;
-        chessBoard.ChessBoard[0][2]?.ARObject = ChessSceneAnchor.whitebishopone!;
-        chessBoard.ChessBoard[0][3]?.ARObject = ChessSceneAnchor.whitequeen!;
-        chessBoard.ChessBoard[0][4]?.ARObject = ChessSceneAnchor.whiteking!;
-        chessBoard.ChessBoard[0][5]?.ARObject = ChessSceneAnchor.whitebishoptwo!;
-        chessBoard.ChessBoard[0][6]?.ARObject = ChessSceneAnchor.whiteknighttwo!;
-        chessBoard.ChessBoard[0][7]?.ARObject = ChessSceneAnchor.whiterooktwo!;
-        
-        chessBoard.ChessBoard[1][0]?.ARObject = ChessSceneAnchor.whitepawnone!;
-        chessBoard.ChessBoard[1][1]?.ARObject = ChessSceneAnchor.whitepawntwo!;
-        chessBoard.ChessBoard[1][2]?.ARObject = ChessSceneAnchor.whitepawnthree!;
-        chessBoard.ChessBoard[1][3]?.ARObject = ChessSceneAnchor.whitepawnfour!;
-        chessBoard.ChessBoard[1][4]?.ARObject = ChessSceneAnchor.whitepawnfive!;
-        chessBoard.ChessBoard[1][5]?.ARObject = ChessSceneAnchor.whitepawnsix!;
-        chessBoard.ChessBoard[1][6]?.ARObject = ChessSceneAnchor.whitepawnseven!;
-        chessBoard.ChessBoard[1][7]?.ARObject = ChessSceneAnchor.whitepawneight!;
-        
-        //BLACK
-        chessBoard.ChessBoard[7][0]?.ARObject = ChessSceneAnchor.blackrookone!;
-        chessBoard.ChessBoard[7][1]?.ARObject = ChessSceneAnchor.blackknightone!;
-        chessBoard.ChessBoard[7][2]?.ARObject = ChessSceneAnchor.blackbishopone!;
-        chessBoard.ChessBoard[7][3]?.ARObject = ChessSceneAnchor.blackqueen!;
-        chessBoard.ChessBoard[7][4]?.ARObject = ChessSceneAnchor.blackking!;
-        chessBoard.ChessBoard[7][5]?.ARObject = ChessSceneAnchor.blackbishoptwo!;
-        chessBoard.ChessBoard[7][6]?.ARObject = ChessSceneAnchor.blackknighttwo!;
-        chessBoard.ChessBoard[7][7]?.ARObject = ChessSceneAnchor.blackrooktwo!;
-        
-        chessBoard.ChessBoard[6][0]?.ARObject = ChessSceneAnchor.blackpawnone!;
-        chessBoard.ChessBoard[6][1]?.ARObject = ChessSceneAnchor.blackpawntwo!;
-        chessBoard.ChessBoard[6][2]?.ARObject = ChessSceneAnchor.blackpawnthree!;
-        chessBoard.ChessBoard[6][3]?.ARObject = ChessSceneAnchor.blackpawnfour!;
-        chessBoard.ChessBoard[6][4]?.ARObject = ChessSceneAnchor.blackpawnfive!;
-        chessBoard.ChessBoard[6][5]?.ARObject = ChessSceneAnchor.blackpawnsix!;
-        chessBoard.ChessBoard[6][6]?.ARObject = ChessSceneAnchor.blackpawnseven!;
-        chessBoard.ChessBoard[6][7]?.ARObject = ChessSceneAnchor.blackpawneight!;
-        */
         
         //map Piece Entity to OOD
         reverseLookUp[ChessSceneAnchor.whiterookone!.name]    = chessBoard.ChessBoard[0][0]!
@@ -222,6 +182,8 @@ class GameViewController: UIViewController {
             PieceOOD!.firstMove = false
             roundNumber += 1
         }
+        
+        self.checkGameEnd()
     }
     
     /**
@@ -259,11 +221,12 @@ class GameViewController: UIViewController {
      */
     func tryKillChessPiece(chessPiece: Entity, to_row: Int, to_col: Int){
         //TODO: Add animation here!
-        let sittingOOD = chessBoard.ChessBoard[to_row][to_col]
+        var sittingOOD = chessBoard.ChessBoard[to_row][to_col]
         let PieceOOD = reverseLookUp[chessPiece.name]
         if(sittingOOD != nil && sittingOOD?.PieceColor != PieceOOD?.PieceColor){
             var sittingEntity = self.entityNameByOOD(OOD: sittingOOD as! ChessPiece)
             sittingEntity!.isEnabled = false
+            sittingOOD!.killed = true
         }
     }
     
@@ -286,5 +249,22 @@ class GameViewController: UIViewController {
         }
     }
     
+    func checkGameEnd(){
+        let enoughPiece = chessBoard.enoughPiecesToRun()
+        
+        if(!enoughPiece){
+            gameEnd = true
+        } else {
+            if(chessBoard.mateCheck()){
+                gameEnd = true
+            }
+        }
+        
+        if(gameEnd){
+            //trigger animation!
+            ChessSceneAnchor.notifications.spingoldstars.post()
+        }
+        
+    }
     
 }

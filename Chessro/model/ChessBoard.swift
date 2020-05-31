@@ -98,7 +98,54 @@ class ChessBoard{
         }
     }
     
+    func enoughPiecesToRun() -> Bool {
+        var white: [ChessPiece] = []
+        var black: [ChessPiece] = []
+        for row in self.ChessBoard {
+            for piece in row {
+                //figure out how many pieces left, other than king!
+                if let check = piece, check.type != .king, !check.killed{
+                    if check.PieceColor == .black {
+                        black.append(check)
+                    } else {
+                        white.append(check)
+                    }
+                }
+            }
+        }
+        
+        return (black.count > 1) || (white.count > 1)
+    }
     
+    func mateCheck() -> Bool{
+        
+        //if no enough pieces to run, directly terminate here!
+        if !self.enoughPiecesToRun() {
+            return false
+        }
+        
+        //TODO: implement real check/checkmate here!
+        
+        //simple check here! if king does not exist, then game ends!
+        var hasWhiteKing = false
+        var hasBlackKing = false
+        
+        for row in self.ChessBoard {
+            for piece in row {
+                //figure out how many pieces left, other than king!
+                if let check = piece, check.type == .king, !check.killed{
+                    if check.PieceColor == .black {
+                        hasBlackKing = true
+                    } else {
+                        hasWhiteKing = true
+                    }
+                }
+            }
+        }
+        
+        //return true if any color has no king!
+        return !(hasWhiteKing && hasBlackKing)
+    }
     
 }
 
