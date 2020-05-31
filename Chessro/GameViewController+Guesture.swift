@@ -14,6 +14,7 @@ extension GameViewController: UIGestureRecognizerDelegate {
     
     // MARK: - Tapping Guesture
     @IBAction func Tapping(_ sender: UITapGestureRecognizer) {
+        print("Current Round Number:", roundNumber)
         let tapLocation = sender.location(in: arView)
         
         if let piece = arView.entity(at: tapLocation){
@@ -45,6 +46,11 @@ extension GameViewController: UIGestureRecognizerDelegate {
                         tappedPiece = nil
                         return
                     }
+                }
+                
+                //if not the right turn, then terminate!
+                if(self.invalidRound(tappedPieceOOD: OOD!)){
+                    return
                 }
                 
                 //ELSE, NOT KILLABLE, THEN reselect Chesspiece here!
@@ -109,13 +115,17 @@ extension GameViewController: UIGestureRecognizerDelegate {
         let tapLocation = sender.location(in: arView)
         let piece = arView.entity(at: tapLocation)
         if piece != nil {
-            _ = reverseLookUp[piece!.name]
+            let OOD = reverseLookUp[piece!.name]
                         
             switch sender.state {
                 case .began:
                     print("Object began to move")
                     self.deleteMovableGrid()
                     if(piece!.name != "board"){
+                        //if not the right turn, then terminate!
+                        if(self.invalidRound(tappedPieceOOD: OOD!)){
+                            return
+                        }
                         tappedPiece = piece
                     }
                 case .changed:

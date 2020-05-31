@@ -45,8 +45,8 @@ class ChessBoard{
         self.ChessBoard[new_row][new_col] = self.ChessBoard[old_row][old_col]
         self.ChessBoard[old_row][old_col] = nil
         
-        print("Chessboard Old Position: ", old_row, old_col, self.ChessBoard[old_row][old_col])
-        print("Chessboard New Position: ", new_row, new_col, self.ChessBoard[new_row][new_col])
+        //print("Chessboard Old Position: ", old_row, old_col, self.ChessBoard[old_row][old_col])
+        //print("Chessboard New Position: ", new_row, new_col, self.ChessBoard[new_row][new_col])
     }
     
     
