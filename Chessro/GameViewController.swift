@@ -20,9 +20,9 @@ class GameViewController: UIViewController {
     var chessBoard = ChessBoard()
     var ChessSceneAnchor = try! Experience.loadChessScene()
     var reverseLookUp = [String: ChessPiece]()
-    
     var movableGrids = Array<ModelEntity>()
     var tappedPiece: Entity?
+    var roundNumber = 1 //mod 1 -> white, 0 -> black
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -173,7 +173,7 @@ class GameViewController: UIViewController {
         var row = 0
         var col = 0
         
-        col = Int(round(x/Float(gridSize) + Float(offset)))
+        col = Int(round(x/Float(gridSize) + Float(offset))) 
         row = Int(round(-z/Float(gridSize) + Float(offset)))
         
         return SIMD2(row, col)
@@ -220,6 +220,7 @@ class GameViewController: UIViewController {
         //only update if the move is a new move!
         if newMove {
             PieceOOD!.firstMove = false
+            roundNumber += 1
         }
     }
     
@@ -265,5 +266,25 @@ class GameViewController: UIViewController {
             sittingEntity!.isEnabled = false
         }
     }
+    
+    /**
+     Check if the current round allows white/black to make a move.
+     @return true if tap is invalid!
+     */
+    func invalidRound(tappedPieceOOD: ChessPiece) -> Bool{
+        let tappedColor = tappedPieceOOD.PieceColor
+        
+        let modeResult = roundNumber % 2
+        
+        //if mod returns 1 and tapped piece has color white, then "NOT" invalid!
+        if(modeResult == 1 && tappedColor == .white){
+            return false
+        } else if(modeResult == 0 && tappedColor == .black){
+            return false
+        } else {
+            return true
+        }
+    }
+    
     
 }
