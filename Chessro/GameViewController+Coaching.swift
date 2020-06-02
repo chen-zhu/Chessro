@@ -16,6 +16,7 @@ extension GameViewController: ARCoachingOverlayViewDelegate {
     func setupCoachingOverlay() {
         coachingOverlay.session = arView.session
         coachingOverlay.delegate = self
+        
         coachingOverlay.translatesAutoresizingMaskIntoConstraints = false
         arView.addSubview(coachingOverlay)
         
