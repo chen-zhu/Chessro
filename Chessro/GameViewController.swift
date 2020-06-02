@@ -13,6 +13,7 @@ import ARKit
 class GameViewController: UIViewController {
     
     @IBOutlet var arView: ARView!
+    @IBOutlet weak var TextLabel: UILabel!
     
     let gridSize = 0.04654
     let gridHeight = 0.0139
@@ -35,6 +36,7 @@ class GameViewController: UIViewController {
         arView.scene.anchors.append(ChessSceneAnchor)//.
        
         self.LinkingEntities()
+        TextLabel.text = "[CALIBRATING] ... ..."
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -172,6 +174,12 @@ class GameViewController: UIViewController {
         if newMove {
             PieceOOD!.firstMove = false
             roundNumber += 1
+            
+            if roundNumber % 2 == 1{
+                TextLabel.text = "[CURRENT TURN]: White Piece"
+            } else {
+                TextLabel.text = "[CURRENT TURN]: Black Piece"
+            }
         }
         
         self.checkGameEnd()
