@@ -117,7 +117,39 @@ class ChessBoard{
         return (black.count > 1) || (white.count > 1)
     }
     
-    func mateCheck() -> Bool{
+    
+    /**
+     This function does not check check, checkmate, etc! it only check if King has been killed or not!
+     
+     TODO: implement real check/checkmate here!
+     */
+    func mateCheck(checkColor: color) -> Bool{
+        
+        //if no enough pieces to run, directly terminate here!
+        if !self.enoughPiecesToRun() {
+            return false
+        }
+        
+        //simple check here! if king does not exist, then game ends!
+        var hasKing = false
+        
+        for row in self.ChessBoard {
+            for piece in row {
+                //figure out how many pieces left, other than king!
+                if let check = piece, check.type == .king, !check.killed{
+                    if check.PieceColor == checkColor {
+                        hasKing = true
+                    }
+                }
+            }
+        }
+        
+        //if has king, then not end yet~
+        return !hasKing
+    }
+    
+    
+    /*func mateCheck() -> Bool{
         
         //if no enough pieces to run, directly terminate here!
         if !self.enoughPiecesToRun() {
@@ -145,7 +177,7 @@ class ChessBoard{
         
         //return true if any color has no king!
         return !(hasWhiteKing && hasBlackKing)
-    }
+    }*/
     
 }
 
