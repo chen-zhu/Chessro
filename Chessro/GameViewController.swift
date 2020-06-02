@@ -249,22 +249,31 @@ class GameViewController: UIViewController {
         }
     }
     
+    
+    /**
+     Actively detect if game ends or not
+     This function will trigger notification to the frontend to call for: White Piece Wins, Black Piece Wins, 
+     */
     func checkGameEnd(){
         let enoughPiece = chessBoard.enoughPiecesToRun()
         
         if(!enoughPiece){
             gameEnd = true
+            ChessSceneAnchor.notifications.draw.post()
         } else {
-            if(chessBoard.mateCheck()){
+            if(chessBoard.mateCheck(checkColor: .white)){
                 gameEnd = true
+                ChessSceneAnchor.notifications.blackwin.post()
+            } else if(chessBoard.mateCheck(checkColor: .black)){
+                gameEnd = true
+                ChessSceneAnchor.notifications.whitewin.post()
             }
         }
         
+        //no matter what, always trigger star if game ends
         if(gameEnd){
-            //trigger animation!
             ChessSceneAnchor.notifications.spingoldstars.post()
         }
-        
     }
     
 }
