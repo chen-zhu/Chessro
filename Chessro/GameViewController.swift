@@ -47,10 +47,12 @@ class GameViewController: UIViewController {
     
     func PeopleOcclusion() {
         guard let config = arView.session.configuration as? ARWorldTrackingConfiguration else {
-            fatalError("Unexpectedly failed to get the configuration.")
+            return
+            //fatalError("Unexpectedly failed to get the configuration.")
         }
         guard ARWorldTrackingConfiguration.supportsFrameSemantics(.personSegmentationWithDepth) else {
-            fatalError("People occlusion is not supported on this device.")
+            return
+            //fatalError("People occlusion is not supported on this device.")
         }
         switch config.frameSemantics {
         case [.personSegmentationWithDepth]:
