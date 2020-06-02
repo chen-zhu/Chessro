@@ -34,6 +34,7 @@ extension GameViewController: ARCoachingOverlayViewDelegate {
     
     func coachingOverlayViewDidDeactivate(_ coachingOverlayView: ARCoachingOverlayView){
         print("Coaching finished!")
+        TextLabel.text = "[CURRENT TURN]: White Piece"
         //self.loadEntities()
     }
     
