@@ -24,14 +24,16 @@ class GameViewController: UIViewController {
     var tappedPiece: Entity?
     var roundNumber = 1 //mod 1 -> white, 0 -> black
     var gameEnd = false
+    let coachingOverlay = ARCoachingOverlayView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupCoachingOverlay()
         
         ChessSceneAnchor = try! Experience.loadChessScene()
         //arView.debugOptions = [ARView.DebugOptions.showFeaturePoints, ARView.DebugOptions.showWorldOrigin, ARView.DebugOptions.showAnchorOrigins]
         arView.scene.anchors.append(ChessSceneAnchor)//.
-        
+       
         self.LinkingEntities()
     }
     
@@ -39,17 +41,6 @@ class GameViewController: UIViewController {
         super.viewDidAppear(animated)
         self.PeopleOcclusion()
         tappedPiece = nil
-        //let notificationList = ChessSceneAnchor.notifications.allNotifications.filter({
-        //    $0.identifier.hasPrefix("white")
-        //})
-        //print(notificationList)
-        //let notificationList2 = ChessSceneAnchor.notifications.allNotifications.filter({
-        //    $0.identifier.hasPrefix("black")
-        //})
-        
-        //self.InstallGuesture()
-        
-        //print(notificationList2)
     }
     
     func PeopleOcclusion() {
