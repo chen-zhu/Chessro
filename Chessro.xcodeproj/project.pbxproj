@@ -23,6 +23,7 @@
 		DD515A3B2473457C009FEBED /* Queen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515A3A2473457C009FEBED /* Queen.swift */; };
 		DD515A3D2473458D009FEBED /* Knight.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515A3C2473458D009FEBED /* Knight.swift */; };
 		DD515A3F24734599009FEBED /* Pawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515A3E24734599009FEBED /* Pawn.swift */; };
+		DDB42E322486C90000F74582 /* GameViewController+Coaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB42E312486C90000F74582 /* GameViewController+Coaching.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		DD515A3A2473457C009FEBED /* Queen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queen.swift; sourceTree = "<group>"; };
 		DD515A3C2473458D009FEBED /* Knight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Knight.swift; sourceTree = "<group>"; };
 		DD515A3E24734599009FEBED /* Pawn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pawn.swift; sourceTree = "<group>"; };
+		DDB42E312486C90000F74582 /* GameViewController+Coaching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+Coaching.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				DD515A1824730F6D009FEBED /* AppDelegate.swift */,
 				DD515A1A24730F6D009FEBED /* GameViewController.swift */,
 				DD23F64B248316C5000B38E2 /* GameViewController+Guesture.swift */,
+				DDB42E312486C90000F74582 /* GameViewController+Coaching.swift */,
 				DD515A1C24730F6D009FEBED /* Main.storyboard */,
 				DD515A1F24730F6D009FEBED /* Experience.rcproject */,
 				DD515A2124730F6E009FEBED /* Assets.xcassets */,
@@ -197,6 +200,7 @@
 				DD515A2E24733C11009FEBED /* ChessPiece.swift in Sources */,
 				DD515A3D2473458D009FEBED /* Knight.swift in Sources */,
 				DD515A352473455E009FEBED /* King.swift in Sources */,
+				DDB42E322486C90000F74582 /* GameViewController+Coaching.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,7 +347,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LMGLLE3QTF;
 				INFOPLIST_FILE = Chessro/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -362,7 +366,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LMGLLE3QTF;
 				INFOPLIST_FILE = Chessro/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
