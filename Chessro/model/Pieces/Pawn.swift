@@ -20,9 +20,9 @@ class Pawn: ChessPiece{
     
     var killed: Bool
     
-    var ARObject: Entity
+    var ARObject: Entity?
     
-    var init_pos = true
+    var firstMove = true
     
     init(setColor: color, r_pos: Int, c_pos: Int) {
         self.PieceColor = setColor
@@ -41,10 +41,12 @@ class Pawn: ChessPiece{
         let checkRow = row + direction
         let checkCol = column
         
+        guard checkRow < 8 && checkRow >= 0 else { return result }
+        
         //If the forawrd position is numm, then move!
         if chessBoard.ChessBoard[checkRow][checkCol] == nil {
             result.append([checkRow, checkCol])
-            if init_pos {
+            if firstMove {
                 let moreStep = checkRow + direction
                 if chessBoard.ChessBoard[moreStep][checkCol] == nil {
                     result.append([moreStep, checkCol])
@@ -73,6 +75,7 @@ class Pawn: ChessPiece{
             }
         }
         
+        //print("Pawn Tapped: current row + col", row, column, "\nMovable Result: \n", result)
         return result
     }
     

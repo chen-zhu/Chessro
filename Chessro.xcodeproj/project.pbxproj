@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD23F64C248316C5000B38E2 /* GameViewController+Guesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD23F64B248316C5000B38E2 /* GameViewController+Guesture.swift */; };
 		DD515A1924730F6D009FEBED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515A1824730F6D009FEBED /* AppDelegate.swift */; };
 		DD515A1B24730F6D009FEBED /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515A1A24730F6D009FEBED /* GameViewController.swift */; };
 		DD515A1E24730F6D009FEBED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD515A1C24730F6D009FEBED /* Main.storyboard */; };
@@ -22,9 +23,11 @@
 		DD515A3B2473457C009FEBED /* Queen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515A3A2473457C009FEBED /* Queen.swift */; };
 		DD515A3D2473458D009FEBED /* Knight.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515A3C2473458D009FEBED /* Knight.swift */; };
 		DD515A3F24734599009FEBED /* Pawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515A3E24734599009FEBED /* Pawn.swift */; };
+		DDB42E322486C90000F74582 /* GameViewController+Coaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB42E312486C90000F74582 /* GameViewController+Coaching.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD23F64B248316C5000B38E2 /* GameViewController+Guesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+Guesture.swift"; sourceTree = "<group>"; };
 		DD515A1524730F6D009FEBED /* Chessro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chessro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD515A1824730F6D009FEBED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD515A1A24730F6D009FEBED /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -42,6 +45,7 @@
 		DD515A3A2473457C009FEBED /* Queen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queen.swift; sourceTree = "<group>"; };
 		DD515A3C2473458D009FEBED /* Knight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Knight.swift; sourceTree = "<group>"; };
 		DD515A3E24734599009FEBED /* Pawn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pawn.swift; sourceTree = "<group>"; };
+		DDB42E312486C90000F74582 /* GameViewController+Coaching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+Coaching.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,8 @@
 				DD515A2C247339DD009FEBED /* model */,
 				DD515A1824730F6D009FEBED /* AppDelegate.swift */,
 				DD515A1A24730F6D009FEBED /* GameViewController.swift */,
+				DD23F64B248316C5000B38E2 /* GameViewController+Guesture.swift */,
+				DDB42E312486C90000F74582 /* GameViewController+Coaching.swift */,
 				DD515A1C24730F6D009FEBED /* Main.storyboard */,
 				DD515A1F24730F6D009FEBED /* Experience.rcproject */,
 				DD515A2124730F6E009FEBED /* Assets.xcassets */,
@@ -181,6 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD23F64C248316C5000B38E2 /* GameViewController+Guesture.swift in Sources */,
 				DD515A3724734567009FEBED /* Rook.swift in Sources */,
 				DD515A3024733EBE009FEBED /* Definition.swift in Sources */,
 				DD515A322473446B009FEBED /* ChessBoard.swift in Sources */,
@@ -193,6 +200,7 @@
 				DD515A2E24733C11009FEBED /* ChessPiece.swift in Sources */,
 				DD515A3D2473458D009FEBED /* Knight.swift in Sources */,
 				DD515A352473455E009FEBED /* King.swift in Sources */,
+				DDB42E322486C90000F74582 /* GameViewController+Coaching.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,7 +347,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5K9869V3WM;
 				INFOPLIST_FILE = Chessro/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -358,7 +366,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5K9869V3WM;
 				INFOPLIST_FILE = Chessro/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

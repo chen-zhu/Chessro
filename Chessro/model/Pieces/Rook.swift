@@ -21,7 +21,9 @@ class Rook: ChessPiece{
     
     var killed: Bool
     
-    var ARObject: Entity
+    var ARObject: Entity?
+    
+    var firstMove = true
     
     init(setColor: color, r_pos: Int, c_pos: Int) {
         self.PieceColor = setColor
