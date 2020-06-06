@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD0166D0248C1447003DCE40 /* MultipeerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0166CD248C1447003DCE40 /* MultipeerHelper.swift */; };
+		DD0166D1248C1447003DCE40 /* HasSynchronization+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0166CE248C1447003DCE40 /* HasSynchronization+Extensions.swift */; };
+		DD0166D2248C1447003DCE40 /* MultipeerHelperDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0166CF248C1447003DCE40 /* MultipeerHelperDelegate.swift */; };
+		DD0166D5248C1574003DCE40 /* GameViewController+MultiPeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0166D4248C1574003DCE40 /* GameViewController+MultiPeer.swift */; };
 		DD23F64C248316C5000B38E2 /* GameViewController+Guesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD23F64B248316C5000B38E2 /* GameViewController+Guesture.swift */; };
 		DD515A1924730F6D009FEBED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515A1824730F6D009FEBED /* AppDelegate.swift */; };
 		DD515A1B24730F6D009FEBED /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515A1A24730F6D009FEBED /* GameViewController.swift */; };
@@ -27,6 +31,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD0166CD248C1447003DCE40 /* MultipeerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerHelper.swift; sourceTree = "<group>"; };
+		DD0166CE248C1447003DCE40 /* HasSynchronization+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HasSynchronization+Extensions.swift"; sourceTree = "<group>"; };
+		DD0166CF248C1447003DCE40 /* MultipeerHelperDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerHelperDelegate.swift; sourceTree = "<group>"; };
+		DD0166D4248C1574003DCE40 /* GameViewController+MultiPeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+MultiPeer.swift"; sourceTree = "<group>"; };
 		DD23F64B248316C5000B38E2 /* GameViewController+Guesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+Guesture.swift"; sourceTree = "<group>"; };
 		DD515A1524730F6D009FEBED /* Chessro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chessro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD515A1824730F6D009FEBED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +67,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD0166CC248C1447003DCE40 /* MultipeerHelper */ = {
+			isa = PBXGroup;
+			children = (
+				DD0166CD248C1447003DCE40 /* MultipeerHelper.swift */,
+				DD0166CE248C1447003DCE40 /* HasSynchronization+Extensions.swift */,
+				DD0166CF248C1447003DCE40 /* MultipeerHelperDelegate.swift */,
+			);
+			path = MultipeerHelper;
+			sourceTree = "<group>";
+		};
 		DD515A0C24730F6D009FEBED = {
 			isa = PBXGroup;
 			children = (
@@ -81,8 +99,10 @@
 				DD515A2C247339DD009FEBED /* model */,
 				DD515A1824730F6D009FEBED /* AppDelegate.swift */,
 				DD515A1A24730F6D009FEBED /* GameViewController.swift */,
+				DD0166D4248C1574003DCE40 /* GameViewController+MultiPeer.swift */,
 				DD23F64B248316C5000B38E2 /* GameViewController+Guesture.swift */,
 				DDB42E312486C90000F74582 /* GameViewController+Coaching.swift */,
+				DD0166CC248C1447003DCE40 /* MultipeerHelper */,
 				DD515A1C24730F6D009FEBED /* Main.storyboard */,
 				DD515A1F24730F6D009FEBED /* Experience.rcproject */,
 				DD515A2124730F6E009FEBED /* Assets.xcassets */,
@@ -195,12 +215,16 @@
 				DD515A1924730F6D009FEBED /* AppDelegate.swift in Sources */,
 				DD515A3924734572009FEBED /* Bishop.swift in Sources */,
 				DD515A3B2473457C009FEBED /* Queen.swift in Sources */,
+				DD0166D5248C1574003DCE40 /* GameViewController+MultiPeer.swift in Sources */,
 				DD515A3F24734599009FEBED /* Pawn.swift in Sources */,
+				DD0166D0248C1447003DCE40 /* MultipeerHelper.swift in Sources */,
+				DD0166D2248C1447003DCE40 /* MultipeerHelperDelegate.swift in Sources */,
 				DD515A2024730F6D009FEBED /* Experience.rcproject in Sources */,
 				DD515A2E24733C11009FEBED /* ChessPiece.swift in Sources */,
 				DD515A3D2473458D009FEBED /* Knight.swift in Sources */,
 				DD515A352473455E009FEBED /* King.swift in Sources */,
 				DDB42E322486C90000F74582 /* GameViewController+Coaching.swift in Sources */,
+				DD0166D1248C1447003DCE40 /* HasSynchronization+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,8 +11,8 @@ import RealityKit
 import ARKit
 
 extension GameViewController: ARCoachingOverlayViewDelegate {
-
-
+    
+    
     func setupCoachingOverlay() {
         coachingOverlay.session = arView.session
         coachingOverlay.delegate = self
@@ -25,7 +25,7 @@ extension GameViewController: ARCoachingOverlayViewDelegate {
             coachingOverlay.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             coachingOverlay.widthAnchor.constraint(equalTo: view.widthAnchor),
             coachingOverlay.heightAnchor.constraint(equalTo: view.heightAnchor)
-            ])
+        ])
         
         coachingOverlay.activatesAutomatically = true
         coachingOverlay.goal = .horizontalPlane
@@ -34,7 +34,7 @@ extension GameViewController: ARCoachingOverlayViewDelegate {
     
     func coachingOverlayViewDidDeactivate(_ coachingOverlayView: ARCoachingOverlayView){
         print("Coaching finished!")
-        TextLabel.text = "[CURRENT TURN]: White Piece"
+        TextLabel.text = "[CURRENT TURN]: ◻️ Piece"
         //self.loadEntities()
     }
     
