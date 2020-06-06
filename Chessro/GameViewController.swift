@@ -9,8 +9,9 @@
 import UIKit
 import RealityKit
 import ARKit
+import MultipeerConnectivity
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, ARSessionDelegate {
     
     @IBOutlet var arView: ARView!
     @IBOutlet weak var TextLabel: UILabel!
@@ -27,14 +28,35 @@ class GameViewController: UIViewController {
     var gameEnd = false
     let coachingOverlay = ARCoachingOverlayView()
     
+    /**
+     Multi Peer Connection
+     */
+    var multipeerHelp: MultipeerHelper!
+    //TODO: make the following dynamic instead of hard-coding here (allow users to select)
+    //ONLY 0-9A-Za-z allowed. Make sure to remove all special characters from your device name, including white space!
+    
+    //hosts: a set of device's names. Only hosts can play the chess game
+    let hosts: Set = ["StonesiPad"]
+    //viewers: a set of device's names. Viewer can only see the chessboard and they cannot manipulate Chess Pieces
+    let viewers: Set = ["StoneZhusiPad"]
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        arView.session.delegate = self
+        
+        //DO NOT EVER TRY TO DISABLE AUTO CONFIG SESSION --> EVERYTHING HAS BEEN PRE-CONFIGURED IN REALITY COMPOSER!
+        //arView.automaticallyConfigureSession = false
+        let config = arView.session.configuration as? ARWorldTrackingConfiguration
+        config?.isCollaborationEnabled = true
+        
+        setupMultipeer()
+        
         self.setupCoachingOverlay()
         
         ChessSceneAnchor = try! Experience.loadChessScene()
         //arView.debugOptions = [ARView.DebugOptions.showFeaturePoints, ARView.DebugOptions.showWorldOrigin, ARView.DebugOptions.showAnchorOrigins]
         arView.scene.anchors.append(ChessSceneAnchor)//.
-       
+        
         self.LinkingEntities()
         TextLabel.text = "[CALIBRATING] ... ..."
     }
@@ -60,6 +82,8 @@ class GameViewController: UIViewController {
         default:
             config.frameSemantics.insert(.personSegmentationWithDepth)
         }
+        
+        config.isCollaborationEnabled = true
         arView.session.run(config)
     }
     
@@ -178,9 +202,9 @@ class GameViewController: UIViewController {
             roundNumber += 1
             
             if roundNumber % 2 == 1{
-                TextLabel.text = "[CURRENT TURN]: White Piece"
+                TextLabel.text = "[CURRENT TURN]: ◻️ Piece"
             } else {
-                TextLabel.text = "[CURRENT TURN]: Black Piece"
+                TextLabel.text = "[CURRENT TURN]: ⬛️ Piece"
             }
         }
         
@@ -195,10 +219,10 @@ class GameViewController: UIViewController {
         for item in reverseLookUp {
             if(
                 item.value.PieceColor == OOD.PieceColor
-                && item.value.column == OOD.column
-                && item.value.row == OOD.row
-                && item.value.type == OOD.type
-            ){
+                    && item.value.column == OOD.column
+                    && item.value.row == OOD.row
+                    && item.value.type == OOD.type
+                ){
                 return ChessSceneAnchor.findEntity(named: item.key)
             }
         }

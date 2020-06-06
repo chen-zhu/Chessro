@@ -75,7 +75,7 @@ extension GameViewController: UIGestureRecognizerDelegate {
                     }
                 }
                 
-            
+                
             } else {
                 //Else, it is possible that user tapped on the chessboard and making move!
                 let piece = arView.entity(at: tapLocation)
@@ -126,60 +126,60 @@ extension GameViewController: UIGestureRecognizerDelegate {
         let piece = arView.entity(at: tapLocation)
         if piece != nil {
             let OOD = reverseLookUp[piece!.name]
-                        
+            
             switch sender.state {
-                case .began:
-                    print("Object began to move")
-                    self.deleteMovableGrid()
-                    if(piece!.name != "board"){
-                        //if not the right turn, then terminate!
-                        if(self.invalidRound(tappedPieceOOD: OOD!)){
-                            return
-                        }
-                        tappedPiece = piece
+            case .began:
+                print("Object began to move")
+                self.deleteMovableGrid()
+                if(piece!.name != "board"){
+                    //if not the right turn, then terminate!
+                    if(self.invalidRound(tappedPieceOOD: OOD!)){
+                        return
                     }
-                case .changed:
-                    print("Moving object position changed")
-                    if(tappedPiece != nil){
-                        let result = arView.raycast(from: tapLocation, allowing: .existingPlaneGeometry, alignment: .any).first
+                    tappedPiece = piece
+                }
+            case .changed:
+                print("Moving object position changed")
+                if(tappedPiece != nil){
+                    let result = arView.raycast(from: tapLocation, allowing: .existingPlaneGeometry, alignment: .any).first
+                    
+                    //no need to move by the grid here!
+                    if(result != nil){
+                        //One stupid way to translate worldTransform to position
+                        let resultAnchor = AnchorEntity(world: result!.worldTransform)
+                        arView.scene.addAnchor(resultAnchor)
+                        var pos = resultAnchor.position(relativeTo: ChessSceneAnchor)
+                        arView.scene.removeAnchor(resultAnchor)
                         
-                        //no need to move by the grid here!
-                        if(result != nil){
-                            //One stupid way to translate worldTransform to position
-                            let resultAnchor = AnchorEntity(world: result!.worldTransform)
-                            arView.scene.addAnchor(resultAnchor)
-                            var pos = resultAnchor.position(relativeTo: ChessSceneAnchor)
-                            arView.scene.removeAnchor(resultAnchor)
-                            
-                            pos.y = Float(gridHeight) + 0.01
-                            var transform = tappedPiece!.transform
-                            transform.translation = pos
-                            tappedPiece!.move(to: transform, relativeTo: tappedPiece!.parent)
-                        }
+                        pos.y = Float(gridHeight) + 0.01
+                        var transform = tappedPiece!.transform
+                        transform.translation = pos
+                        tappedPiece!.move(to: transform, relativeTo: tappedPiece!.parent)
                     }
-                case .cancelled, .failed, .ended:
-                    print("Done moving object")
-                    if(tappedPiece != nil){
-                        //1. put down object!
-                        let PieceOOD = reverseLookUp[tappedPiece!.name]
-                        let movableSet = PieceOOD!.validStep(chessBoard: chessBoard)
-                        let tapped_index = self.translate_index(x: tappedPiece!.position.x, y: tappedPiece!.position.y, z: tappedPiece!.position.z)
-                        
-                        if(movableSet.contains(tapped_index)){
-                            self.moveChessPiece(chessPiece: tappedPiece!, to_row: tapped_index.x, to_col: tapped_index.y)
-                        } else {
-                            print("resume original position!")
-                            self.moveChessPiece(chessPiece: tappedPiece!, to_row: PieceOOD!.row, to_col: PieceOOD!.column, newMove: false)
-                        }
+                }
+            case .cancelled, .failed, .ended:
+                print("Done moving object")
+                if(tappedPiece != nil){
+                    //1. put down object!
+                    let PieceOOD = reverseLookUp[tappedPiece!.name]
+                    let movableSet = PieceOOD!.validStep(chessBoard: chessBoard)
+                    let tapped_index = self.translate_index(x: tappedPiece!.position.x, y: tappedPiece!.position.y, z: tappedPiece!.position.z)
+                    
+                    if(movableSet.contains(tapped_index)){
+                        self.moveChessPiece(chessPiece: tappedPiece!, to_row: tapped_index.x, to_col: tapped_index.y)
+                    } else {
+                        print("resume original position!")
+                        self.moveChessPiece(chessPiece: tappedPiece!, to_row: PieceOOD!.row, to_col: PieceOOD!.column, newMove: false)
                     }
-                    //2. reset object
-                    self.deleteMovableGrid()
-                    tappedPiece = nil
-                default:
-                    break
+                }
+                //2. reset object
+                self.deleteMovableGrid()
+                tappedPiece = nil
+            default:
+                break
             }
         }
     }
     
-
+    
 }
