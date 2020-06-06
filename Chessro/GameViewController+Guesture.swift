@@ -85,6 +85,7 @@ extension GameViewController: UIGestureRecognizerDelegate {
                     //Raycast!
                     let result = arView.raycast(from: tapLocation, allowing: .existingPlaneGeometry, alignment: .any).first
                     
+                    
                     if(result != nil){
                         //let notification = ChessSceneAnchor.notifications.allNotifications.filter({
                         //    $0.identifier.hasPrefix(tappedPiece!.name)

@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "MultipeerSession",
+        "repositoryURL": "https://github.com/AddedLayer/multipeer-session.git",
+        "state": {
+          "branch": null,
+          "revision": "1a03845f089eb2a57d5bae39b922df02371be4d1",
+          "version": "1.0.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

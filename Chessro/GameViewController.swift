@@ -9,11 +9,16 @@
 import UIKit
 import RealityKit
 import ARKit
+import MultipeerSession
 
 class GameViewController: UIViewController {
     
     @IBOutlet var arView: ARView!
     @IBOutlet weak var TextLabel: UILabel!
+    
+    //multiuser
+    var multipeerSession: MultipeerSession?
+    var sessionIDObservation: NSKeyValueObservation?
     
     let gridSize = 0.04654
     let gridHeight = 0.0139
@@ -41,11 +46,18 @@ class GameViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         self.PeopleOcclusion()
         tappedPiece = nil
+        
+        //multiuser
+        setupMultipeerSession()
     }
     
     func PeopleOcclusion() {
+        
+        arView.automaticallyConfigureSession = false
+        
         guard let config = arView.session.configuration as? ARWorldTrackingConfiguration else {
             return
             //fatalError("Unexpectedly failed to get the configuration.")
@@ -60,7 +72,21 @@ class GameViewController: UIViewController {
         default:
             config.frameSemantics.insert(.personSegmentationWithDepth)
         }
+        
+        config.isCollaborationEnabled = true
         arView.session.run(config)
+    }
+    
+    func setupMultipeerSession(){
+        
+        sessionIDObservation = observe(\.arView.session.identifier, options: [.new]){ object, change
+            in
+            guard let multipeerSession = self.multipeerSession else {return}
+            self.sendARSessionIDTo(peers: multipeerSession.connectedPeers)
+        }
+        
+        multipeerSession = MultipeerSession(serviceName: "multiuser-ar", receivedDataHandler: self.receivedData, peerJoinedHandler: self.peerJoined, peerLeftHandler: self.peerLeft, peerDiscoveredHandler: self.peerDiscovered)
+        
     }
     
     func LinkingEntities(){
@@ -274,6 +300,91 @@ class GameViewController: UIViewController {
         //no matter what, always trigger star if game ends
         if(gameEnd){
             ChessSceneAnchor.notifications.spingoldstars.post()
+        }
+    }
+    
+}
+
+// MARK: - MultiuserSession
+
+extension GameViewController {
+    private func sendARSessionIDTo(peers: [PeerID]){
+        guard let multipeerSession = multipeerSession else {return}
+        let idString = arView.session.identifier.uuidString
+        let command = "SessionID:" + idString
+        if let commandData = command.data(using: .utf8) {
+            multipeerSession.sendToPeers(commandData, reliably: true, peers: peers)
+        }
+    }
+    
+    func receivedData(data: Data, from peer: PeerID){
+        guard let multipeerSession = multipeerSession else {return}
+        if let collaborationData = try? NSKeyedUnarchiver.unarchivedObject(ofClass: ARSession.CollaborationData.self, from: data){
+            arView.session.update(with: collaborationData)
+            return
+        }
+        
+        let sessionIDCommandString = "SessionID:"
+        if let commandString = String(data: data, encoding: .utf8), commandString.starts(with: sessionIDCommandString){
+            let newSessionID = String(commandString[commandString.index(commandString.startIndex, offsetBy: sessionIDCommandString.count)...])
+            
+            if let oldSessionID = multipeerSession.peerSessionIDs[peer] {
+                removeAllAnchorsOriginatingFromARSessionWithID(identifier: oldSessionID)
+            }
+            
+            multipeerSession.peerSessionIDs[peer] = newSessionID
+        }
+    }
+    
+    func peerDiscovered(peer: PeerID) -> Bool {
+        guard let multipeerSession = multipeerSession else {return false}
+        
+        if multipeerSession.connectedPeers.count > 3 {
+            print("A Third player wants to join.")
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    func peerJoined( peer: PeerID) {
+        print("""
+                A player wnats to join the game.
+                Hold the devices next to each other
+            """)
+        sendARSessionIDTo(peers: [peer])
+    }
+    
+    func peerLeft( peer: PeerID) {
+        guard let multipeerSession = multipeerSession else {return}
+        print("A player has left the game")
+        
+        if let sessionID = multipeerSession.peerSessionIDs[peer]{
+            removeAllAnchorsOriginatingFromARSessionWithID(identifier: sessionID)
+            multipeerSession.peerSessionIDs.removeValue(forKey: peer)
+        }
+    }
+    
+    private func removeAllAnchorsOriginatingFromARSessionWithID( identifier: String){
+        guard let frame = arView.session.currentFrame else {return}
+        for anchor in frame.anchors {
+            guard let anchorSessionID = anchor.sessionIdentifier else { continue }
+            if anchorSessionID.uuidString == identifier {
+                arView.session.remove(anchor: anchor)
+            }
+        }
+    }
+    
+    func session( session: ARSession, didOutputCollaborationData data: ARSession.CollaborationData) {
+        guard let multipeerSession = multipeerSession else { return }
+        if !multipeerSession.connectedPeers.isEmpty {
+            guard let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: data, requiringSecureCoding: true)
+                else { fatalError("unexpectedly failed to encode collaboration data") }
+            
+            let dataIsCritical = data.priority == .critical
+            multipeerSession.sendToAllPeers(encodedData, reliably: dataIsCritical)
+        } else {
+            print("Deferred sending collaboration to later because there are no peers " )
         }
     }
     

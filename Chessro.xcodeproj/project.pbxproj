@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D4BDBCA2489A99A006751D2 /* MultipeerSession in Frameworks */ = {isa = PBXBuildFile; productRef = 3D4BDBC92489A99A006751D2 /* MultipeerSession */; };
 		DD23F64C248316C5000B38E2 /* GameViewController+Guesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD23F64B248316C5000B38E2 /* GameViewController+Guesture.swift */; };
 		DD515A1924730F6D009FEBED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515A1824730F6D009FEBED /* AppDelegate.swift */; };
 		DD515A1B24730F6D009FEBED /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515A1A24730F6D009FEBED /* GameViewController.swift */; };
@@ -53,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D4BDBCA2489A99A006751D2 /* MultipeerSession in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +134,9 @@
 			dependencies = (
 			);
 			name = Chessro;
+			packageProductDependencies = (
+				3D4BDBC92489A99A006751D2 /* MultipeerSession */,
+			);
 			productName = Chessro;
 			productReference = DD515A1524730F6D009FEBED /* Chessro.app */;
 			productType = "com.apple.product-type.application";
@@ -160,6 +165,9 @@
 				Base,
 			);
 			mainGroup = DD515A0C24730F6D009FEBED;
+			packageReferences = (
+				3D4BDBC82489A99A006751D2 /* XCRemoteSwiftPackageReference "multipeer-session" */,
+			);
 			productRefGroup = DD515A1624730F6D009FEBED /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -400,6 +408,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3D4BDBC82489A99A006751D2 /* XCRemoteSwiftPackageReference "multipeer-session" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AddedLayer/multipeer-session.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3D4BDBC92489A99A006751D2 /* MultipeerSession */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3D4BDBC82489A99A006751D2 /* XCRemoteSwiftPackageReference "multipeer-session" */;
+			productName = MultipeerSession;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DD515A0D24730F6D009FEBED /* Project object */;
 }
