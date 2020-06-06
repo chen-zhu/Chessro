@@ -33,7 +33,23 @@ extension GameViewController: MultipeerHelperDelegate {
     }
     
     func peerJoined(_ peer: MCPeerID) {
-        print("NEW PEER JOINED: \(peer.displayName)")
+        //hide current Chessboard IFF:
+        //1. current device name is on the viewers list
+        //2. joined peer name is on the hosts list
+        
+        let currentDeviceName = UIDevice.current.name.replacingOccurrences( of:"[^0-9a-zA-Z]", with: "", options: .regularExpression)
+        let peerDeviceName = peer.displayName.replacingOccurrences( of:"[^0-9a-zA-Z]", with: "", options: .regularExpression)
+        
+        print("Peer Name: " + peerDeviceName + ". Current Name: " + currentDeviceName)
+        
+        if(viewers.contains(currentDeviceName) && hosts.contains(peerDeviceName)){
+            //arView.scene.removeAnchor(ChessSceneAnchor)
+            ChessSceneAnchor.synchronization = nil
+            for child  in ChessSceneAnchor.children {
+                child.isEnabled = false
+            }
+            print("Remove anchor from current device because peer is host and current device is viewer")
+        }
     }
     
 }

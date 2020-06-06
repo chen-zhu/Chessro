@@ -32,7 +32,14 @@ class GameViewController: UIViewController, ARSessionDelegate {
      Multi Peer Connection
      */
     var multipeerHelp: MultipeerHelper!
+    //TODO: make the following dynamic instead of hard-coding here (allow users to select)
+    //ONLY 0-9A-Za-z allowed. Make sure to remove all special characters from your device name, including white space!
     
+    //hosts: a set of device's names. Only hosts can play the chess game
+    let hosts: Set = ["StonesiPad"]
+    //viewers: a set of device's names. Viewer can only see the chessboard and they cannot manipulate Chess Pieces
+    let viewers: Set = ["StoneZhusiPad"]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         arView.session.delegate = self
