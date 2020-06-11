@@ -1,5 +1,5 @@
 # Chessro 
-> Final Project for ** CS291A - Mixed and Augmented Reality**, UCSB, Spring 2020
+> Final Project for CS291A - Mixed and Augmented Reality, UCSB, Spring 2020
 
 Chessro is an Augmented Reality Chess Game built for iOS and iPadOS devices (iOS/iPadOS 13.4.0 and above). This project is taking advantage of the following API/Framework & Tools from Apple Developer Portal:
 
