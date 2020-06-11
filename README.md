@@ -9,6 +9,7 @@ Chessro is an Augmented Reality Chess Game built for iOS and iPadOS devices (iOS
   - MultipeerConnectivity
   - Reality Composer
   - Xcode
+  - [maxxfrazer/MultipeerHelper](https://github.com/maxxfrazer/MultipeerHelper)
 
 # Features
 
