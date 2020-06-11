@@ -14,6 +14,7 @@ Chessro is an Augmented Reality Chess Game built for iOS and iPadOS devices (iOS
 
 ### Basic Coaching Overlay
 - Instruct users to calibrate device camera
+
 ![](Images/CoachingOverlay.gif)
 
 ### User Interaction
@@ -22,10 +23,12 @@ Chessro is an Augmented Reality Chess Game built for iOS and iPadOS devices (iOS
 - Show Movable Grids
 - Auto-resume position 
 - Accurate Grid Mapping
+
 ![](Images/Interaction.gif)
 
 ### Basic Human Occlusion
 - Devices with **Dual-Camera** or **LIDAR-SCANNER** System can participate in Human Occlusion.
+
 ![](Images/Occlusion.gif)
 
 ### Multipeer - RealityKit Network Synchronization
@@ -33,4 +36,5 @@ Chessro is an Augmented Reality Chess Game built for iOS and iPadOS devices (iOS
 - All other devices can join as PEER and view gaming process.
 - Currently, no interaction from PEER devices is allowed
 - HOST and PEER/VIEWER devices can be configured under the *GameViewController.swift* file
+
 ![](Images/ARNetwork.gif)
